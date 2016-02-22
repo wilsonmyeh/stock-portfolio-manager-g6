@@ -24,6 +24,6 @@ function checkTime(i) {
 </head>
 <body onload="startTime()" style="text-align:center; color:white; font-size:128pt;" background="helloworld_files/small_waves_1920x1200.jpg">
 <div id="clock">Sun Feb 21 2016
-05:46:03</div>
+05:49:08</div>
 
 </body></html>
