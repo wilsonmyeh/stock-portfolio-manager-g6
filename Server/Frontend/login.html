@@ -5,9 +5,24 @@
 <head>
 	<title>Login</title>
 	<link rel="stylesheet" href="style.css">
+
+	<script>
+
+	function httpGet(theUrl)
+	{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    var string = JSON.stringify(xmlHttp.responseText);
+    console.log(string);
+    return xmlHttp.responseText;
+	}
+
+	</script>
+	
 </head>
 
-<body>
+<body onload="httpGetAsync(http:\/\/api.nytimes.com/svc/search/v2/articlesearch.json?q=apple&page=2&sort=oldest&api-key=961c27bf384825e6d91309f9946c615c:12:74529530)" >
 
 	<div id="login">
 
