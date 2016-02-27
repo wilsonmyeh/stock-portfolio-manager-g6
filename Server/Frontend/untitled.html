@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <html>
-
-var string;
 
 <head>
 	<title>Login</title>
@@ -15,22 +14,36 @@ var string;
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", "http://api.nytimes.com/svc/search/v2/articlesearch.json?q=apple&page=2&sort=oldest&api-key=961c27bf384825e6d91309f9946c615c:12:74529530", false) // false for synchronous request
     xmlHttp.send( null );
-    string = JSON.stringify(xmlHttp.responseText, null, 2);
-    console.log(string);
-    document.getElementById("results").innerHTML = string;
+    var prettyString = JSON.stringify(JSON.parse(xmlHttp.responseText), null, 2);
+    document.getElementById("results").innerHTML = prettyString;
     return xmlHttp.responseText;
 	}
 
-	function displayJSON()
-	{
-		
+	//http://stackoverflow.com/questions/17245498/get-stock-quotes-from-yahoo-finance-in-json-format-using-a-javascript
+	function getData() {
+	    var url = 'http://query.yahooapis.com/v1/public/yql';
+
+	    //for linking to button
+	    //var symbol = $("#symbol").val();
+	    //var data = encodeURIComponent("select * from yahoo.finance.quotes where symbol in ('" + symbol + "')");
+
+	    var data = encodeURIComponent("select * from yahoo.finance.quotes where symbol in ('AAPL')");
+
+	    $.getJSON(url, 'q=' + data + "&format=json&diagnostics=true&env=http://datatables.org/alltables.env")
+	        .done(function (data) {
+	            $('#yqlresults').text("Price: " + data.query.results.quote.LastTradePriceOnly);
+	        })
+	        .fail(function (jqxhr, textStatus, error) {
+	            var err = textStatus + ", " + error;
+	            console.log('Request failed: ' + err);
+	        });
 	}
 
 	</script>
 	
 </head>
 
-<body onload= "httpGet()" >
+<body onload= "getData()" >
 
 	<div id="login">
 
@@ -38,7 +51,9 @@ var string;
 
 	<h2>Login</h2> <br>
 
-	<h3 id="results"></h3>
+	<!-- <h3 id="results"></h3> -->
+
+	<h4 id ="yqlresults"></h4>
 
 	<form action="dashboard.html">
 	Username:<br>
