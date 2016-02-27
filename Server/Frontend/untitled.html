@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html>
+
+var string;
+
+<head>
+	<title>Login</title>
+	<link rel="stylesheet" href="style.css">
+
+	<script>
+
+	function httpGet()
+	{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", "http://api.nytimes.com/svc/search/v2/articlesearch.json?q=apple&page=2&sort=oldest&api-key=961c27bf384825e6d91309f9946c615c:12:74529530", false) // false for synchronous request
+    xmlHttp.send( null );
+    string = JSON.stringify(xmlHttp.responseText, null, 2);
+    console.log(string);
+    document.getElementById("results").innerHTML = string;
+    return xmlHttp.responseText;
+	}
+
+	function displayJSON()
+	{
+		
+	}
+
+	</script>
+	
+</head>
+
+<body onload= "httpGet()" >
+
+	<div id="login">
+
+	<h1>Welcome to Stock Portfolio Manager</h1>
+
+	<h2>Login</h2> <br>
+
+	<h3 id="results"></h3>
+
+	<form action="dashboard.html">
+	Username:<br>
+	<input type="text" name="user" placeholder="username" required><br>
+	Password:<br>
+	<input type="password" name="password" placeholder="password" required><br><br>
+	<input type="submit" value="Login">
+	</form>
+	<br>
+	<a href="recovery.html">Forgot Password?</a>
+
+	</div>
+
+</body>
+
+</html>	
