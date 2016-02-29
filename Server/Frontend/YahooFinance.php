@@ -42,7 +42,7 @@ class YahooStock{
      * @param string $param Parameters/Format to be fetched
      * @return void
      */
-  public function addFormat($format)
+    public function addFormat($format)
     {
         $this->format = $format;
     }
@@ -70,7 +70,7 @@ class YahooStock{
       /** 
        * convert the comma separated data into array
        */
-            $data = explode( ',', $s);
+            $data = str_getcsv($s, ",", '"');
       
       /** 
        * populate result array with stock code as key
