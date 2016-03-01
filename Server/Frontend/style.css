@@ -1,7 +1,7 @@
 body{
 	font-family: arial, helvetica, sans-serif;
 	font-size: 14px;
-	color: black;
+	color: #222222;
 	background-color: #222222;
 	margin: 20px;
 }
@@ -110,6 +110,7 @@ h2{
 		height: 300px;
 		left: 0.1%;
 		float: left;
+		overflow-y: scroll;
 	}
 
 	#graph{
@@ -145,6 +146,7 @@ h2{
 		height: 250px;
 		left: 5px;
 		float: left;
+		overflow-y: scroll;
 	}
 
 	#watchlist{
@@ -152,6 +154,7 @@ h2{
 		height: 250px;
 		left: 5px;
 		float: left;
+		overflow-y: scroll;
 	}
 
 footer{

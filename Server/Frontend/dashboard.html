@@ -15,7 +15,7 @@
 
 		<script>
 			function startTime() {
-				var today = new Date();
+				var today = convertToEasternStandardTimeZone(new Date());
 				var date = today.toDateString();
 				var hour = (today.getHours()+11)%12 + 1;
 				var min = today.getMinutes();
@@ -23,7 +23,10 @@
 				hour = checkTime(hour);
 				min = checkTime(min);
 				sec = checkTime(sec);
-				document.getElementById('clock').innerHTML = date + "\n" + hour + ":" + min + ":" + sec;
+				document.getElementById('clock').innerHTML = date + ",\n" + hour + ":" + min + ":" + sec + " EST";
+				if((hour = 9 && min < 30) || (hour < 9) || (hour > 16)){
+					disableBuySell(true);
+				}
 				var t = setTimeout(startTime, 500);
 
 				<!-- JQuery Autocomplete Tutorial
@@ -42,16 +45,17 @@
 						var results = json.ResultSet.Result;
 						results.forEach(function(stock)
 						{
-							console.log(stock.symbol);
-							stocks.push(stock.symbol);
+							stocks.push(stock.symbol + " (" +stock.name + ")");
 						});
 					});
 
 		            $( "#tickersearchbar" ).autocomplete({
-		               source: stocks
+		            	
+					    source: stocks
 		            });
 		         });
 			}
+
 			function checkTime(i) {
 				if (i < 10) {
 					i = "0" + i;
@@ -59,6 +63,19 @@
 				return i;
 			}
 
+			function disableBuySell(allow) {
+				document.getElementById("buybutton").disabled = allow;
+				document.getElementById("sellbutton").disabled = allow;
+			}
+
+			function convertToEasternStandardTimeZone(date) {
+				//EST
+				offset = -5.0;
+				clientDate = date;
+				utc = clientDate.getTime() + (clientDate.getTimezoneOffset() * 60000);
+				ESTDate = new Date(utc + (3600000*offset));
+				return ESTDate;
+			}
 
 		</script>
 
@@ -71,8 +88,11 @@
 		<div id = "dashboard">
 
 			<div class="widget" id="import">
-				<h2>Import</h2>
-				<button type="button">Import CSV</button>
+				<h2>Import Portfolio</h2>
+				<form action="http://localhost/Frontend/importcsv.php" method="post" enctype="multipart/form-data">
+					<input type="file" name="fileToUpload" id="fileToUpload">
+					<input type="submit" value="Upload CSV" name="submit">
+				</form>
 			</div>
 
 			<div class="widget" id="search">
@@ -113,8 +133,8 @@
 				<input type="text" placeholder="Ticker" size = "2">
 				<input type="text" placeholder="Company Name" size = "6"><br><br>
 				<input type="text" placeholder="Quantity" size = "10"><br><br>
-				<input type="submit" value="Buy">
-				<input type="submit" value="Sell">
+				<input type="submit" value="Buy" id = "buybutton">
+				<input type="submit" value="Sell" id = "sellbutton">
 				</form>
 			</div>
 
