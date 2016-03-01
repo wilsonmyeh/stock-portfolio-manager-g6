@@ -1,47 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html>
 
-<head>
-	<title>Login</title>
-	<link rel="stylesheet" href="style.css">
+	<head>
 
-	<script>
+		<title>Login</title>
+		<link rel="icon" href="favicon.png">
+		<link rel="stylesheet" href="style.css">
 
-	function httpGet(theUrl)
-	{
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-    xmlHttp.send( null );
-    var string = JSON.stringify(xmlHttp.responseText);
-    console.log(string);
-    return xmlHttp.responseText;
-	}
+		<script>
+			function httpGet(theUrl){
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+				xmlHttp.send( null );
+				var string = JSON.stringify(xmlHttp.responseText);
+				console.log(string);
+				return xmlHttp.responseText;
+			}
+		</script>
 
-	</script>
-	
-</head>
+	</head>
 
-<body onload="httpGetAsync(http:\/\/api.nytimes.com/svc/search/v2/articlesearch.json?q=apple&page=2&sort=oldest&api-key=961c27bf384825e6d91309f9946c615c:12:74529530)" >
+	<body onload="httpGetAsync(http:\/\/api.nytimes.com/svc/search/v2/articlesearch.json?q=apple&page=2&sort=oldest&api-key=961c27bf384825e6d91309f9946c615c:12:74529530)" >
 
-	<div id="login">
+		<div class = "widget" id="login">
+			<h1>Welcome to Stock Portfolio Manager</h1><br>
+			<h2>Login</h2> <br>
+			<form action="dashboard.html">
+				Username:<input type="text" required><br><br>
+				Password:<input type="password" required><br><br>
+				<input type="submit" value="Login">
+			</form><br>
+			<a class="button" href="recovery.html">Forgot Password?</a>
+		</div>
 
-	<h1>Welcome to Stock Portfolio Manager</h1>
-
-	<h2>Login</h2> <br>
-
-	<form action="dashboard.html">
-	Username:<br>
-	<input type="text" name="user" placeholder="username" required><br>
-	Password:<br>
-	<input type="password" name="password" placeholder="password" required><br><br>
-	<input type="submit" value="Login">
-	</form>
-	<br>
-	<a href="recovery.html">Forgot Password?</a>
-
-	</div>
-
-</body>
+	</body>
 
 </html>	
