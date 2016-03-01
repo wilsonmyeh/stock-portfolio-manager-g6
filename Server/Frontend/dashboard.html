@@ -1,5 +1,10 @@
 <!doctype html>
 
+<!-- JQuery -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+
 <html>
 
 	<head>
@@ -20,6 +25,32 @@
 				sec = checkTime(sec);
 				document.getElementById('clock').innerHTML = date + "\n" + hour + ":" + min + ":" + sec;
 				var t = setTimeout(startTime, 500);
+
+				<!-- JQuery Autocomplete Tutorial
+				http://www.tutorialspoint.com/jqueryui/jqueryui_autocomplete.htm#autocomplete_methods -->
+
+				$(function()
+				{
+					var searchVal = document.getElementById('tickersearchbar').value;
+					var url = 'http://d.yimg.com/aq/autoc?query=';
+					url += searchVal;
+					url += '&region=US&lang=en-US&callback=?'
+
+					var stocks = [];
+					$.getJSON(url, function(json)
+					{
+						var results = json.ResultSet.Result;
+						results.forEach(function(stock)
+						{
+							console.log(stock.symbol);
+							stocks.push(stock.symbol);
+						});
+					});
+
+		            $( "#tickersearchbar" ).autocomplete({
+		               source: stocks
+		            });
+		         });
 			}
 			function checkTime(i) {
 				if (i < 10) {
@@ -27,6 +58,8 @@
 				}
 				return i;
 			}
+
+
 		</script>
 
 	</head>
@@ -45,7 +78,9 @@
 			<div class="widget" id="search">
 				<h2>Search</h2><br>
 				<form action="">
-					<input type="text" placeholder = "Company Name or Ticker" size = "40">
+					<div class="ui-widget">
+						<input id="tickersearchbar" type="text" placeholder = "Company Name or Ticker" size = "40">
+					</div>
 					<input type="submit" value="Search">
 				</form>
 			</div>
