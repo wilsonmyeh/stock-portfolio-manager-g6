@@ -24,7 +24,7 @@ class YahooStock{
    * Parameters string to be fetched   
    */
   private $format;
- 
+
     /**
      * Populate stock array with stock code
    *

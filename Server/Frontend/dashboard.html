@@ -1,69 +1,114 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html>
 
-<head>
-	<title>Your Dashboard</title>
-	<link rel="stylesheet" href="style.css">
-</head>
+	<head>
 
-<body>
+		<title>Your Dashboard</title>
+		<link rel="icon" href="favicon.png">
+		<link rel="stylesheet" href="style.css">
 
-	<h1>Your Dashboard</h1>
-	
-	<div id="graph">
-		<h2>Main Line Graph</h2>
-		<div class="btn-group">
-		<button type="button" class="btn btn-primary">1d</button>
-		<button type="button" class="btn btn-primary">5d</button>
-		<button type="button" class="btn btn-primary">1m</button>
-		<button type="button" class="btn btn-primary">3m</button>
-		<button type="button" class="btn btn-primary">6m</button>
-		<button type="button" class="btn btn-primary">All</button>
+		<script>
+			function startTime() {
+				var today = new Date();
+				var date = today.toDateString();
+				var hour = (today.getHours()+11)%12 + 1;
+				var min = today.getMinutes();
+				var sec = today.getSeconds();
+				hour = checkTime(hour);
+				min = checkTime(min);
+				sec = checkTime(sec);
+				document.getElementById('clock').innerHTML = date + "\n" + hour + ":" + min + ":" + sec;
+				var t = setTimeout(startTime, 500);
+			}
+			function checkTime(i) {
+				if (i < 10) {
+					i = "0" + i;
+				}
+				return i;
+			}
+		</script>
+
+	</head>
+
+	<body onload="startTime()">
+
+		<h1>Your Dashboard</h1>
+
+		<div id = "dashboard">
+
+			<div class="widget" id="import">
+				<h2>Import</h2>
+				<button type="button">Import CSV</button>
+			</div>
+
+			<div class="widget" id="search">
+				<h2>Search</h2><br>
+				<form action="">
+					<input type="text" placeholder = "Company Name or Ticker" size = "40">
+					<input type="submit" value="Search">
+				</form>
+			</div>
+
+			<div class="widget" id="account">
+				<h2>Your Account</h2>
+				<div id="clock">Sun Feb 21 2016<br>05:49:08</div>
+				Account Balance: CA$H<br>
+				Portfolio Value: MONEY<br>
+				<button type="button">Logout</button>
+			</div>
+
+			<div class="widget" id="portfolio">
+				<h2>Portfolio Scroll List</h2>
+			</div>
+			
+			<div class="widget" id="graph">
+				<h2>Main Line Graph</h2>
+			</div>
+
+			<div class="widget" id="manualandlegend">
+				<h2>User Manual</h2>
+				<a class="button" href="manual.html">User Manual</a>
+				<h2>Legend</h2>
+			</div>
+
+			<div class="widget" id="buysell">
+				<h2>Stock Trader</h2><br>
+				<form action="">
+				<input type="text" placeholder="Ticker" size = "2">
+				<input type="text" placeholder="Company Name" size = "6"><br><br>
+				<input type="text" placeholder="Quantity" size = "10"><br><br>
+				<input type="submit" value="Buy">
+				<input type="submit" value="Sell">
+				</form>
+			</div>
+
+			<div class="widget" id="detailedinfo">
+				<h2>Stock Information</h2>
+
+			</div>
+
+			<div class="widget" id="news">
+				<h2>News</h2>
+				
+			</div>
+
+			<div class="widget" id="watchlist">
+				<h2>Watchlist</h2>
+				
+			</div>
+
 		</div>
-	</div>
 
-	<div id="search">
-		<h2>Search Widget</h2>
-		<button type="button">Import CSV</button>
-		<form action="">
-		Stock:<input type="text" placeholder="e.g. AAPL or Apple"><br>
-		<input type="submit" value="Search">
-		</form>
-	</div>
+	</body>
 
-	<div id="portfolio">
-		<h2>Portfolio Scroll List Widget</h2>
-	</div>
-
-	<div id="info">
-		<h2>Detailed Information Widget</h2>
-	</div>
-
-	<div id="trader">
-		<h2>Stock Trader Widget</h2>
-		<form action="">
-		Stock name:<input type="text" placeholder="e.g. Apple"><br>
-		Stock ticker:<input type="text" placeholder="e.g. AAPL"><br>
-		Stock quantity:<input type="text"  placeholder="e.g. 100"><br>
-		<input type="submit" value="Buy">
-		<input type="submit" value="Sell">
-		</form>
-	</div>
-
-	<div id="watchlist">
-		<h2>Watchlist Scroll Widget</h2>
-	</div>
-
-	<div id="value">
-		<h2>Time, Account Balance, and Portfolio Value Widget</h2>
-		<button type="button">User Manual</button>
-	</div>
-
-	<div id="news">
-		<h2>News Widget</h2>
-	</div>
-
-</body>
+	<footer>
+		<a href="https://youtu.be/dQw4w9WgXcQ">About Us </a>
+		<a href="https://youtu.be/dQw4w9WgXcQ">Contact </a>
+		<a href="https://youtu.be/dQw4w9WgXcQ">FAQ </a>
+		<a href="https://youtu.be/dQw4w9WgXcQ">Terms Of Use </a>
+		<a href="https://youtu.be/dQw4w9WgXcQ">Privacy Policy </a>
+		<p>COPYRIGHT &#169 2016 CSCI310 2016129967 Project 1 Group 6 All Rights Reserved</p>
+	</footer>
 
 </html>	

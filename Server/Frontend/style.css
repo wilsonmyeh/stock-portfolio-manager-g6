@@ -1,64 +1,178 @@
-body {
+body{
 	font-family: arial, helvetica, sans-serif;
 	font-size: 14px;
 	color: black;
 	background-color: #222222;
 	margin: 20px;
-	padding: 0;
 }
 
-h1 {
+h1{
+	position: relative;
 	color: #222222;
-	background-color: #900;
+	background-color: #FFFFFF;
 	font-size: 2em;
 	margin: 0;
 	margin-bottom: 7px;
 	padding: 4px;
 	text-align: center;
-	border-bottom-style: solid;
-	border-bottom-width: 0.5em;
-	border-bottom-color: #c00;
+	border-radius: 5px;
+	left: 25%;
+	width: 50%;
 }
 
-h2 {
-	color: white;
+h2{
+	color: #222222;
 	text-align: center;
-	background-color: #090;
 	font-size: 1.5em;
 	margin: 0;
 	padding: 2px;
 	padding-left: 14px;
 }
 
-h3 {
-	color: #999;
-	font-size: 1.25em;
-}
+.button{
+	-webkit-appearance: button;
+	-moz-appearance: button;
+	appearance: button;
 
-img {
-	border-style: dashed;
-	border-width: 2px;
-	border-color: #ccc;
-}
-
-a {
 	text-decoration: none;
+	color: initial;
+	padding: 3px
 }
 
-strong {
-	font-style: italic;
-	text-transform: uppercase;
-}
+#login{
+	position: absolute;
+	top: 25%;
+	right: 25%;
+	bottom: 25%;
+	left: 25%;
 
-li {
-	color: #900;
-	font-style: italic;
-}
-
-#login {
 	background-color: #FFFFFF;
 	text-align: center;
-	width: 500px;
 	padding: 10px;
 	margin: 0 auto;
+}
+
+#recovery{
+	position: absolute;
+	top: 25%;
+	right: 25%;
+	bottom: 25%;
+	left: 25%;
+
+	background-color: #FFFFFF;
+	text-align: center;
+	padding: 50px;
+	margin: 0 auto;
+}
+
+#dashboard{
+	border-radius: 5px;
+	text-align: center;
+	border-width: thin;
+	padding: 5px;
+	margin: 5px;
+}
+
+.widget{
+	position: relative;
+	border-radius: 5px;
+	text-align: center;
+	border-style: solid;
+	border-width: thin;
+	background: #FFFFFF;
+	padding: 5px;
+	margin: 5px;
+}
+
+	#import{
+		width: 15%;
+		height: 100px;
+		left: 0.1%;
+		float: left;
+	}
+
+	#search{
+		width: 56%;
+		height: 100px;
+		left: 3px;
+		float: left;
+	}
+
+	#account{
+		width: 20%;
+		height: 100px;
+		left: 5px;
+		float: left;
+	}
+
+	#portfolio{
+		width: 20%;
+		height: 300px;
+		left: 0.1%;
+		float: left;
+	}
+
+	#graph{
+		width: 56%;
+		height: 300px;
+		left: 4px;
+		float: left;
+	}
+
+	#manualandlegend{
+		width: 15%;
+		height: 300px;
+		left: 5px;
+		float: left;
+	}
+
+	#buysell{
+		width: 17%;
+		height: 250px;
+		left: .5%;
+		float: left;
+	}
+
+	#detailedinfo{
+		width: 30%;
+		height: 250px;
+		left: 8px;
+		float: left;
+	}
+
+	#news{
+		width: 24%;
+		height: 250px;
+		left: 5px;
+		float: left;
+	}
+
+	#watchlist{
+		width: 18%;
+		height: 250px;
+		left: 5px;
+		float: left;
+	}
+
+footer{
+	padding: 10px;
+	bottom: 0;
+	text-align: center;
+
+	color: gray;
+	font-size: .75em;
+
+	position: fixed;
+    bottom: 0;
+    left: 25%;
+    width: 50%;
+
+    z-index: -1;
+}
+
+footer a{
+	padding: 0px 3px;
+
+	font-size: 1em;
+	color:gray;
 }
