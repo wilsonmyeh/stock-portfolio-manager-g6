@@ -50,7 +50,11 @@
 					});
 
 		            $( "#tickersearchbar" ).autocomplete({
-		            	
+		            	select:function(event, ui){
+		            		var ticker = ui.item.label.split(" ")[0];
+		            		$("#tickersearchbar").val(ticker);
+		            		return false;
+					    },
 					    source: stocks
 		            });
 		         });
