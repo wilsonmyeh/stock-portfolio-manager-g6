@@ -80,3 +80,4 @@ class YahooStock{
         return $result;
     }
 } 
+?>
