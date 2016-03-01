@@ -1,0 +1,30 @@
+03/01/16 00:20:02
+Retrieved 3 portfolios
+Querying 3 stocks
+AAPL
+FB
+GOOG
+Retrieved 3 stock objects
+Successfully destroyed stock objects
+Code: AAPL
+Last Trade (Price Only): 96.69
+Code: FB
+Last Trade (Price Only): 106.92
+Code: GOOG
+Last Trade (Price Only): 697.77
+
+03/01/16 00:26:01
+Retrieved 3 portfolios
+Querying 3 stocks
+AAPL
+FB
+GOOG
+Retrieved 3 stock objects
+Successfully destroyed stock objects
+Code: AAPL
+Last Trade (Price Only): 96.69
+Code: FB
+Last Trade (Price Only): 106.92
+Code: GOOG
+Last Trade (Price Only): 697.77
+
