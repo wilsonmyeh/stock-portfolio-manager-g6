@@ -26,9 +26,9 @@
 		<div class = "widget" id="login">
 			<h1>Welcome to Stock Portfolio Manager</h1><br>
 			<h2>Login</h2> <br>
-			<form action="dashboard.html">
-				Username:<input type="text" required><br><br>
-				Password:<input type="password" required><br><br>
+			<form action="http://localhost/Frontend/checklogin.php" method = "POST">
+				Username:<input type="text" name = "user" required><br><br>
+				Password:<input type="password" name = "password" required><br><br>
 				<input type="submit" value="Login">
 			</form><br>
 			<a class="button" href="recovery.html">Forgot Password?</a>
