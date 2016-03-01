@@ -28,36 +28,6 @@
 					disableBuySell(true);
 				}
 				var t = setTimeout(startTime, 500);
-
-				<!-- JQuery Autocomplete Tutorial
-				http://www.tutorialspoint.com/jqueryui/jqueryui_autocomplete.htm#autocomplete_methods -->
-
-				$(function()
-				{
-					var searchVal = document.getElementById('tickersearchbar').value;
-					var url = 'http://d.yimg.com/aq/autoc?query=';
-					url += searchVal;
-					url += '&region=US&lang=en-US&callback=?'
-
-					var stocks = [];
-					$.getJSON(url, function(json)
-					{
-						var results = json.ResultSet.Result;
-						results.forEach(function(stock)
-						{
-							stocks.push(stock.symbol + " (" +stock.name + ")");
-						});
-					});
-
-		            $( "#tickersearchbar" ).autocomplete({
-		            	select:function(event, ui){
-		            		var ticker = ui.item.label.split(" ")[0];
-		            		$("#tickersearchbar").val(ticker);
-		            		return false;
-					    },
-					    source: stocks
-		            });
-		         });
 			}
 
 			function checkTime(i) {
@@ -159,6 +129,39 @@
 
 		</div>
 
+		<script>
+			<!-- JQuery Autocomplete Tutorial
+			http://www.tutorialspoint.com/jqueryui/jqueryui_autocomplete.htm#autocomplete_methods -->
+			document.getElementById('tickersearchbar').oninput = function ()
+			{
+				$(function()
+				{
+					var searchVal = document.getElementById('tickersearchbar').value;
+					var url = 'http://d.yimg.com/aq/autoc?query=';
+					url += searchVal;
+					url += '&region=US&lang=en-US&callback=?'
+
+					var stocks = [];
+					$.getJSON(url, function(json)
+					{
+						var results = json.ResultSet.Result;
+						results.forEach(function(stock)
+						{
+							stocks.push(stock.symbol + " (" +stock.name + ")");
+						});
+					});
+
+		            $( "#tickersearchbar" ).autocomplete({
+		            	select:function(event, ui){
+		            		var ticker = ui.item.label.split(" ")[0];
+		            		$("#tickersearchbar").val(ticker);
+		            		return false;
+					    },
+					    source: stocks
+		            });
+		        });
+			}
+		</script>
 	</body>
 
 	<footer>
