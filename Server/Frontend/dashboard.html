@@ -38,8 +38,11 @@
 		<div id = "dashboard">
 
 			<div class="widget" id="import">
-				<h2>Import</h2>
-				<button type="button">Import CSV</button>
+				<h2>Import Portfolio</h2>
+				<form action="http://localhost/Frontend/importcsv.php" method="post" enctype="multipart/form-data">
+					<input type="file" name="fileToUpload" id="fileToUpload">
+    				<input type="submit" value="Upload CSV" name="submit">
+				</form>
 			</div>
 
 			<div class="widget" id="search">
