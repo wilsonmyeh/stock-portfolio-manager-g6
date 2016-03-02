@@ -17,6 +17,8 @@ use Parse\ParseObject;
 use Parse\ParseQuery;
 ParseClient::initialize('YtTIOIVkgKimi9f3KgvmhAm9be09KaFPD0lK1r21', 'Bxf6gl3FUT0goWvvx3DIger9bcOjwY1LflXr6MIO', 'r86cSKPWagMCavzJXVF4OFnte5yPpNY74GhY9UxS');
 
+header("Access-Control-Allow-Origin: *");
+
 $backup_log = fopen("logs/backup_log.txt","a");
 $curTime = getdate();
 # Write timestamp

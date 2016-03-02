@@ -26,7 +26,7 @@ $objYahooStock->addFormat("snl1d1t1c1p2");
   goog = Google
   aapl = Apple  
  */
-$objYahooStock->addStock("msft");
+$objYahooStock->addStock("aapl");
 $objYahooStock->addStock("amzn");
 $objYahooStock->addStock("yhoo");
 $objYahooStock->addStock("goog"); 

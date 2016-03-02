@@ -73,7 +73,7 @@ JQuery Plugin for idle timeout
 				};
 				xhttp.open("GET", "http://localhost/Frontend/retrievePortfolioYahoo.php", true);
 				xhttp.send();
-				$(function(){
+				$(document).ready(function(){
 					$("#portfolio").css('overflow-y', 'top');
 				});
 			}
@@ -92,10 +92,27 @@ JQuery Plugin for idle timeout
 				});
 			}
 
+			// http://stackoverflow.com/questions/10943544/how-to-parse-an-rss-feed-using-javascript
+			function populateNewsWidget() {
+				var xhttp1 = new XMLHttpRequest();
+				xhttp1.onreadystatechange = function() {
+						if (xhttp1.readyState == 4 && xhttp1.status == 200) {
+						document.getElementById("newscontent").innerHTML = xhttp1.responseText;
+					}
+				};
+				xhttp1.open("GET", "http://localhost/Frontend/retrieveNewsMarketpulse.php", true);
+				xhttp1.send();
+
+				$(function(){
+					$("#news").css('overflow-y', 'top');
+				});
+			}
+
 			function onLoad() {
 				startTime();
 				populatePortfolio();
 				populateWatchlist();
+				populateNewsWidget();
 			}
 
 		</script>
@@ -103,7 +120,7 @@ JQuery Plugin for idle timeout
 	</head>
 
 	<body onload="onLoad()">
-
+	
 		<h1>Your Dashboard</h1>
 
 		<div id = "dashboard">
@@ -118,12 +135,12 @@ JQuery Plugin for idle timeout
 
 			<div class="widget" id="search">
 				<h2>Search</h2><br>
-				<form action="searchbar.php" method="POST">
+				<form action="http://localhost/Frontend/searchbar.php" method="post" enctype="multipart/form-data">
 					<div class="ui-widget">
-						<input id="tickersearchbar" type="text" placeholder = "Company Name or Ticker" size = "40">
+						<input type="text" name="searchbar" id="tickersearchbar" placeholder = "Company Name or Ticker" size = "40">
 					</div>
-					<input type="submit" value="Graph" name="graph">
-					<input type="submit" value="Add to Watchlist" name="watch">
+					<input type="submit" value="Graph" name="a">
+					<input type="submit" value="Add to Watchlist" name="b">
 				</form>
 			</div>
 
@@ -136,7 +153,7 @@ JQuery Plugin for idle timeout
 			</div>
 
 			<div class="widget" id="portfolio">
-				<h2>Portfolio Scroll List</h2>
+				<h2>Portfolio</h2>
 				<div id="portfoliocontent">
 					<br><br><br><img src="images/ajax-loader.gif" alt="loading..." style="width:32px;height:32px;">
 				</div>
@@ -164,13 +181,15 @@ JQuery Plugin for idle timeout
 			</div>
 
 			<div class="widget" id="detailedinfo">
-				<h2>Stock Information</h2>
+				<h2>Detailed Stock Information</h2>
 
 			</div>
 
 			<div class="widget" id="news">
 				<h2>News</h2>
-				
+				<div id="newscontent">
+					<br><br><br><img src="images/ajax-loader.gif" alt="loading..." style="width:32px;height:32px;">
+				</div>
 			</div>
 
 			<div class="widget" id="watchlist">
