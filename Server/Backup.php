@@ -17,6 +17,7 @@ use Parse\ParseObject;
 use Parse\ParseQuery;
 ParseClient::initialize('YtTIOIVkgKimi9f3KgvmhAm9be09KaFPD0lK1r21', 'Bxf6gl3FUT0goWvvx3DIger9bcOjwY1LflXr6MIO', 'r86cSKPWagMCavzJXVF4OFnte5yPpNY74GhY9UxS');
 
+# CORS to handle Same Origin Policy
 header("Access-Control-Allow-Origin: *");
 
 $backup_log = fopen("logs/backup_log.txt","a");
@@ -26,6 +27,7 @@ fwrite($backup_log, date("m/d/y H:i:s\n"));
 # Implement a set by appending stocks to the array as keys
 $stockSet = array();
 
+#retrieve all currently tracked stocks in every portfolio
 $query = new ParseQuery("Portfolio");
 $query->exists("stockNames");
 $portfolios = $query->find();
@@ -41,6 +43,7 @@ foreach ($portfolios as $portfolio)
 	}
 }
 
+# grab closing prices from Yahoo! Finance API
 $yahooStockQuery = new YahooStock;
 # key (the stock) is stored in $stock, $value should always be 1
 fwrite($backup_log, "Querying " . count($stockSet) . " stocks\n");
@@ -66,6 +69,7 @@ foreach ($objects as $object)
 }
 fwrite($backup_log, "Successfully destroyed stock objects\n");
 
+# backup each stock to parse database
 foreach ($quotes as $ticker => $stock)
 {
 	fwrite($backup_log, "Code: " . $stock[0] . "\n");
