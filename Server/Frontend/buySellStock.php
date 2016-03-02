@@ -43,6 +43,7 @@
 				}
 
 				$globalAccount->getPortfolio()->buyStock($tickerName,$stockQuantity,$stockPrice);
+				readfile("http://localhost/Frontend/dashboard.html");
 			}
 			else if($_POST['action'] == 'Sell'){
 
@@ -51,6 +52,7 @@
 				$stockQuantity = $_POST["quantity"];
 
 				$globalAccount->getPortfolio()->sellStock($tickerName,$stockQuantity);
+				readfile("http://localhost/Frontend/dashboard.html");
 
 			}
 		}
