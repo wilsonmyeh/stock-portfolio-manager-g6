@@ -2,10 +2,10 @@
 
 abstract class Stock
 {
-	public $ticker;
-	public $currentValue;
-	public $companyName;
-	public $initialDate;
+	private $ticker;
+	private $currentValue;
+	private $companyName;
+	private $initialDate;
 	
 	
 	
