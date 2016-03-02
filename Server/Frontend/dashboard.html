@@ -1,5 +1,22 @@
 <!doctype html>
 
+<!-- JQuery -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js" ></script>
+
+<!-- 
+https://github.com/marcuswestin/store.js 
+JQuery Plugin for cross browser local storage, for synchronizing idle timeout across tabs
+-->
+<script src="plugins/store.min.js"></script>
+
+<!--
+https://github.com/JillElaine/jquery-idleTimeout
+JQuery Plugin for idle timeout
+-->
+<script src="plugins/jquery-idleTimeout.min.js"></script>
+
 <html>
 
 	<head>
@@ -27,16 +44,19 @@
 				}
 				var t = setTimeout(startTime, 500);
 			}
+
 			function checkTime(i) {
 				if (i < 10) {
 					i = "0" + i;
 				}
 				return i;
 			}
+
 			function disableBuySell(allow) {
 				document.getElementById("buybutton").disabled = allow;
 				document.getElementById("sellbutton").disabled = allow;
 			}
+
 			function convertToEasternStandardTimeZone(date) {
 				//EST
 				offset = -5.0;
@@ -101,7 +121,9 @@
 			<div class="widget" id="search">
 				<h2>Search</h2><br>
 				<form action="searchbar.php" method="POST">
-					<input type="text" placeholder = "Company Name or Ticker" size = "40">
+					<div class="ui-widget">
+						<input id="tickersearchbar" type="text" placeholder = "Company Name or Ticker" size = "40">
+					</div>
 					<input type="submit" value="Graph" name="graph">
 					<input type="submit" value="Add to Watchlist" name="watch">
 				</form>
@@ -112,7 +134,7 @@
 				<div id="clock">Sun Feb 21 2016<br>05:49:08</div>
 				Account Balance: CA$H<br>
 				Portfolio Value: MONEY<br>
-				<button type="button">Logout</button>
+				<button type="button" id="logoutbutton">Logout</button>
 			</div>
 
 			<div class="widget" id="portfolio">
@@ -162,6 +184,66 @@
 
 		</div>
 
+		<script>
+			<!-- JQuery Autocomplete Tutorial
+			http://www.tutorialspoint.com/jqueryui/jqueryui_autocomplete.htm#autocomplete_methods -->
+			document.getElementById('tickersearchbar').oninput = function ()
+			{
+				$(function()
+				{
+					var searchVal = document.getElementById('tickersearchbar').value;
+					var url = 'http://d.yimg.com/aq/autoc?query=';
+					url += searchVal;
+					url += '&region=US&lang=en-US&callback=?'
+
+					var stocks = [];
+					$.getJSON(url, function(json)
+					{
+						var results = json.ResultSet.Result;
+						results.forEach(function(stock)
+						{
+							stocks.push(stock.symbol + " (" +stock.name + ")");
+						});
+					});
+
+		            $( "#tickersearchbar" ).autocomplete({
+		            	select:function(event, ui){
+		            		var ticker = ui.item.label.split(" ")[0];
+		            		$("#tickersearchbar").val(ticker);
+		            		return false;
+					    },
+					    source: stocks
+		            });
+		        });
+			}
+
+			function logout() {
+				window.location.href = "http://localhost/Frontend/logout.php";
+			}
+
+			document.getElementById("logoutbutton").onclick = function() {
+				// https://github.com/JillElaine/jquery-idleTimeout
+				// logs out of all Stock Portfolio Tracker tabs
+				$.fn.idleTimeout().logout();
+				logout();
+			}
+
+			// https://github.com/JillElaine/jquery-idleTimeout
+			$(document).ready(function () {
+			    $(document).idleTimeout({
+			   		// redirect (logout) on timeout
+				    redirectUrl:  "http://localhost/Frontend/logout.php",
+
+				    // idle settings
+				    idleTimeLimit: 240,           // 'No activity' time limit in seconds. 240 = 4 Minutes (Total 5 minutes of inactivity for automatic logout)
+				    idleCheckHeartbeat: 2,       // Frequency to check for idle timeouts in seconds
+
+				    // warning dialog box configuration
+				    enableDialog: true,           // set to false for logout without warning dialog
+				    dialogDisplayLimit: 60,       // Time to display the warning dialog before logout (and optional callback) in seconds. 60 = 1 Minute (Total 5 minutes of inactivity for automatic logout)
+			    });
+			});
+		</script>
 	</body>
 
 	<footer>
