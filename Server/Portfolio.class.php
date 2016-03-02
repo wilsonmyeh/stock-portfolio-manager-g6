@@ -9,12 +9,12 @@
 
      class Portfolio{
 
-          public $totalValue;
-          public $username;
-          public $bankBalance;
+          private $totalValue;
+          private $username;
+          private $bankBalance;
 
-          public $trackedStock = array();
-          public $ownedStock = array();
+          private $trackedStock = array();
+          private $ownedStock = array();
 
           //query from parse for this user's portfolio. if they already have one, create
           //an associative array of ownedStock where the key is the stock ticker and the value is a
@@ -25,6 +25,10 @@
             }   
           }
 
+          //Create a portfolio for someone uploading their CSV.
+          public function createPortfolio($stockTickerNames,$associativeNumber,$associativeDate,$associativePrice){
+
+          }
           //query from parse for this user's watchlist. if they already have one, create
           //an associative array of trackedStock where the key is the stock ticker and the value is a
           //php TrackedStock object
@@ -63,8 +67,7 @@
           public function buyStock($stockTicker, $numShares, $purchasePrice){
 
               $queryStock = new ParseQuery("Portfolio");
-              ///////USE GLOBAL OBJECT USERNAME
-              $queryStock->equalTo("username", "rebecca@usc.edu");
+              $queryStock->equalTo("username", $this->username);
               try {
                 $portfolio = $queryStock->first();
                 // The object was retrieved successfully.
@@ -142,7 +145,7 @@
           public function sellStock($stockTicker, $numShares){
                $queryStock = new ParseQuery("Portfolio");
                ///////USE GLOBAL OBJECT USERNAME
-               $queryStock->equalTo("username", "rebecca@usc.edu");
+               $queryStock->equalTo("username", $this->username);
                try {
                  $portfolio = $queryStock->first();
                  // The object was retrieved successfully.

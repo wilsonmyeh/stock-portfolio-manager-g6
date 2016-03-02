@@ -2,8 +2,8 @@
 <body>	
 	<?php
 		class OwnedStock extends Stock{
-			public $initialPurchasePrice;
-			public $numberOwned;
+			private $initialPurchasePrice;
+			private $numberOwned;
 
 			public function getInitialPurchasePrice(){
 				return $initialPurchasePrice;

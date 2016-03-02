@@ -100,6 +100,14 @@
 		   	    }
 		   	    catch (ParseException $ex) {
 
+		   	    //They have an account that does not have a portfolio yet
+		   	     $portfolioObj->setBankBalance(10000);
+		   	     //Create account information
+		   	        $accountObj = new Account();
+					$accountObj->setPortfolio($portfolioObj);
+					$accountObj->setUsername($usernameText);
+		   	       	$_SESSION['account'] =  $accountObj;
+
 		   	    }
 
 
