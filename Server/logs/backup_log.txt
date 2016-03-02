@@ -28,3 +28,33 @@ Last Trade (Price Only): 106.92
 Code: GOOG
 Last Trade (Price Only): 697.77
 
+03/01/16 13:01:01
+Retrieved 8 portfolios
+Querying 8 stocks
+AAPL
+FB
+GOOG
+CMG
+COST
+EBAY
+GLD
+NFLX
+Retrieved 8 stock objects
+Successfully destroyed stock objects
+Code: AAPL
+Last Trade (Price Only): 100.43
+Code: FB
+Last Trade (Price Only): 109.6436
+Code: GOOG
+Last Trade (Price Only): 717.0001
+Code: CMG
+Last Trade (Price Only): 507.985
+Code: COST
+Last Trade (Price Only): 150.22
+Code: EBAY
+Last Trade (Price Only): 24.175
+Code: GLD
+Last Trade (Price Only): 118.055
+Code: NFLX
+Last Trade (Price Only): 98.09
+
