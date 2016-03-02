@@ -26,10 +26,7 @@
 		//getting the user's portfolio from Parse
 		$queryWatchlist = new ParseQuery("Watchlist");
 
-		//////******COMMENT THIS IN WHEN WE HAVE ACTUAL LOCAL OBJECTS****///
-		// $queryStock->equalTo("username", username);
-
-		$queryWatchlist->equalTo("username", "rebecca@usc.edu");
+		$queryWatchlist->equalTo("username", $_SESSION['account'] -> getPortfolio() -> getUsername());
 		try {
 			$watchlist = $queryWatchlist->first();
 
@@ -39,14 +36,18 @@
 				if (($tickerKey = array_search($tickerName, $stockNames)) !== false) { //if they are tracking the stock, remove it from them
 						unset($stockNames[$tickerKey]);
 						$watchlist->setArray("stockNames", $stockNames); //push update to parse
-						try{ //save this update to parse
-					$watchlist->save();
-				} 
-				catch (ParseException $ex) {  
-					echo 'Failed to update stock names when buying stock ' . $ex->getMessage();
+					try{ //save this update to parse
+						$watchlist->save();
+					} 
+					catch (ParseException $ex) {  
+						echo 'Failed to update stock names when buying stock ' . $ex->getMessage();
+					}
 				}
-			}
-			}
+			//update local object
+			if ( ($watchKey = array_search($tickerName, $_SESSION['account']->getPortflio()->getOwnedStock()))_ !== false) {
+                  unset($_SESSION['account']->getPortfolio()->getOwnedStock()[$watchKey]);
+             }
+		}
 
 		catch (ParseException $ex) {
 			// The object was not retrieved successfully.

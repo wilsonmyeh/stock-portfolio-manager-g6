@@ -127,6 +127,7 @@
 		}
 
 		createNewPortfolioInParse($stockTickerNames, $stockTickerShares, $stockTickerDates, $stockTickerPrices);
+		populatePortfolio($stockTickerNames, $stockTickerShares, $stockTickerDates, $stockTickerPrices);
 	}
 
 	function createNewPortfolioInParse($stockTickerNames, $stockTickerShares, $stockTickerDates, $stockTickerPrices){
@@ -164,8 +165,8 @@
 		  //Create n array of the owned stock to be added to the portfolio
 		  for($x = 0; $x < count($stockTickerNames);$x++){
   	        	$ownedStock = new OwnedStock();
-				 $ownedStock->setTicker($stockTickerNames[$x]);
-		      	$ownedStock->setInitialDate($stockTickerDatesv[$stockTickerNames[$x]]);
+				$ownedStock->setTicker($stockTickerNames[$x]);
+		      	$ownedStock->setInitialDate($stockTickerDates[$stockTickerNames[$x]]);
 		  		$ownedStock->setInitialPurchasePrice($stockTickerPrices[$stockTickerNames[$x]]);
 		   	    $ownedStock->setNumberOwned($stockTickerShares[$stockTickerNames[$x]]);
 

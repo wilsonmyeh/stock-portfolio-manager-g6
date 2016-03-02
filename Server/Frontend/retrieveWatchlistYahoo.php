@@ -4,6 +4,9 @@
 
 	include_once('../Portfolio.class.php');
 	include_once('../Account.class.php');
+	include_once('../Stock.class.php');
+	include_once('../TrackedStock.class.php');
+	include_once('../OwnedStock.class.php');
 	include_once('YahooFinance.php');
 
 	//Allow for errors to be displayed
@@ -17,8 +20,8 @@
 		$objYahooStock = new YahooStock;
 		$objYahooStock->addFormat("snl1d1c1p2"); 
 
-		$stockNames = array("AAPL", "CMG", "COST", "FB", "GOOG");//hard coded test case for now
-		//*****UPDATE LOCAL VARIABLES*****$stockNames = _SESSION["ownedStocks"];
+		$stockNames = array_keys(_SESSION["account"] -> getPortfolio() -> getTrackedStock());
+		
 		foreach($stockNames as $code => $stock){
 			$objYahooStock->addStock((string)$stock);
 		}
