@@ -121,10 +121,9 @@
 	}
 
 	function createNewPortfolioInParse($stockTickerNames, $stockTickerShares, $stockTickerDates, $stockTickerPrices){
-		// $username = $_SESSION["account"] -> username;
 		$newPortfolio = new ParseObject("Portfolio");
 
-		$newPortfolio->set("username", "jonathan@usc.edu");
+		$newPortfolio->set("username", $_SESSION["account"] -> username);
 		$newPortfolio->set("accountBalance", 10000);
 		$newPortfolio->setArray("stockNames", $stockTickerNames);
 		$newPortfolio->setAssociativeArray("purchaseDates", $stockTickerDates);
