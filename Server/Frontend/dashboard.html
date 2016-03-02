@@ -73,7 +73,7 @@ JQuery Plugin for idle timeout
 				};
 				xhttp.open("GET", "http://localhost/Frontend/retrievePortfolioYahoo.php", true);
 				xhttp.send();
-				$(function(){
+				$(document).ready(function(){
 					$("#portfolio").css('overflow-y', 'top');
 				});
 			}
@@ -120,7 +120,7 @@ JQuery Plugin for idle timeout
 	</head>
 
 	<body onload="onLoad()">
-
+	
 		<h1>Your Dashboard</h1>
 
 		<div id = "dashboard">

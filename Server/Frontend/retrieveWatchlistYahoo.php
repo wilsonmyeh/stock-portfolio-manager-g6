@@ -36,14 +36,13 @@
 
 
 				<b><?php echo $stock[1]; ?> (<?php echo $stock[0]; ?>)</b> <br />
-				<b>Last Trade Price:</b> <?php echo'$ '.$stock[2]; ?> <br />
-				<b>Last Trade Date:</b> <?php echo $stock[3]; ?> <br />
-				<b>Dollar Change:</b> <?php echo '$ '. $stock[4]; ?> <br />
-				<b>Percent Change:</b> <?php echo $stock[5]; ?> <br />
+				<b>Price:</b> <span class="money"><?php echo'$ '.$stock[2]; ?></span> <br />
+				<b>Dollar Change:</b>  <span class="money"><?php echo '$ '. $stock[4]; ?></span> <br />
+				<b>Percent Change:</b> <span class="money"><?php echo $stock[5]; ?></span> <br />
 				<input type="checkbox">Graph
 				
-				<form action="http://localhost/Frontend/removeWatchedStock.php" method="post" enctype="multipart/form-data">
-					<input hidden type="text" name="ticker" value = <?php echo $stock[0]; ?>>
+				<form action="http://localhost/Frontend/removeWatchedStock.php" method="post" enctype="multipart/form-data" style="display: inline;">
+					<input hidden type="text" name="ticker"  value = <?php echo $stock[0]; ?>>
 					<input type="submit" value="X">
 				</form>
 
