@@ -16,7 +16,7 @@ class Stock
 	
 	public function addHistoricalData($price, $date)
 	{
-		$this->historicalData[] = array("price"=>$price, "date"=>$date);
+		$this->historicalData[$date] = array("price"=>$price, "date"=>$date);
 	}
 	
 	public function outputData()
