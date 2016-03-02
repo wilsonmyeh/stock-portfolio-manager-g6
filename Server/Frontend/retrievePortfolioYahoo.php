@@ -11,6 +11,8 @@
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);	
 
+	header("Access-Control-Allow-Origin: *");
+
 	function pullPortfolioDataFromYahoo(){
 		$objYahooStock = new YahooStock;
 		$objYahooStock->addFormat("snl1d1c1p2"); 
