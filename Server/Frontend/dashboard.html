@@ -1,7 +1,7 @@
 <!doctype html>
 
 <!-- JQuery -->
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <link href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js" ></script>
 
@@ -24,8 +24,6 @@ JQuery Plugin for idle timeout
 		<title>Your Dashboard</title>
 		<link rel="icon" href="images/favicon.png">
 		<link rel="stylesheet" href="style.css">
-
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
 		<script>
 
@@ -120,12 +118,12 @@ JQuery Plugin for idle timeout
 
 			<div class="widget" id="search">
 				<h2>Search</h2><br>
-				<form action="searchbar.php" method="POST">
+				<form action="http://localhost/Frontend/searchbar.php" method="post" enctype="multipart/form-data">
 					<div class="ui-widget">
-						<input id="tickersearchbar" type="text" placeholder = "Company Name or Ticker" size = "40">
+						<input type="text" name="searchbar" id="tickersearchbar" placeholder = "Company Name or Ticker" size = "40">
 					</div>
-					<input type="submit" value="Graph" name="graph">
-					<input type="submit" value="Add to Watchlist" name="watch">
+					<input type="submit" value="Graph" name="a">
+					<input type="submit" value="Add to Watchlist" name="b">
 				</form>
 			</div>
 
@@ -138,7 +136,7 @@ JQuery Plugin for idle timeout
 			</div>
 
 			<div class="widget" id="portfolio">
-				<h2>Portfolio Scroll List</h2>
+				<h2>Portfolio</h2>
 				<div id="portfoliocontent">
 					<br><br><br><img src="images/ajax-loader.gif" alt="loading..." style="width:32px;height:32px;">
 				</div>
@@ -166,7 +164,7 @@ JQuery Plugin for idle timeout
 			</div>
 
 			<div class="widget" id="detailedinfo">
-				<h2>Stock Information</h2>
+				<h2>Detailed Stock Information</h2>
 
 			</div>
 
