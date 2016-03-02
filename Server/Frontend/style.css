@@ -179,3 +179,14 @@ footer a{
 	font-size: 1em;
 	color:gray;
 }
+
+.stockmodule{
+	position: relative;
+	border-radius: 5px;
+	text-align: center;
+	border-style: solid;
+	border-width: thin;
+	background: #FFFFFF;
+	padding: 5px;
+	margin: 5px;
+}
