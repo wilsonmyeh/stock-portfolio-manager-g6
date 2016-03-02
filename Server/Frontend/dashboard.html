@@ -1,16 +1,34 @@
 <!doctype html>
 
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<link href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js" ></script>
+
+<!-- 
+https://github.com/marcuswestin/store.js 
+JQuery Plugin for cross browser local storage, for synchronizing idle timeout across tabs
+-->
+<script src="plugins/store.min.js"></script>
+
+<!--
+https://github.com/JillElaine/jquery-idleTimeout
+JQuery Plugin for idle timeout
+-->
+<script src="plugins/jquery-idleTimeout.min.js"></script>
+
 <html>
 
 	<head>
 
 		<title>Your Dashboard</title>
-		<link rel="icon" href="favicon.png">
+		<link rel="icon" href="images/favicon.png">
 		<link rel="stylesheet" href="style.css">
 
 		<script>
+
 			function startTime() {
-				var today = new Date();
+				var today = convertToEasternStandardTimeZone(new Date());
 				var date = today.toDateString();
 				var hour = (today.getHours()+11)%12 + 1;
 				var min = today.getMinutes();
@@ -18,35 +36,94 @@
 				hour = checkTime(hour);
 				min = checkTime(min);
 				sec = checkTime(sec);
-				document.getElementById('clock').innerHTML = date + "\n" + hour + ":" + min + ":" + sec;
+				document.getElementById('clock').innerHTML = date + ",\n" + hour + ":" + min + ":" + sec + " EST";
+				if((hour = 9 && min < 30) || (hour < 9) || (hour > 16)){
+					disableBuySell(true);
+				}
 				var t = setTimeout(startTime, 500);
 			}
+
 			function checkTime(i) {
 				if (i < 10) {
 					i = "0" + i;
 				}
 				return i;
 			}
+
+			function disableBuySell(allow) {
+				document.getElementById("buybutton").disabled = allow;
+				document.getElementById("sellbutton").disabled = allow;
+			}
+
+			function convertToEasternStandardTimeZone(date) {
+				//EST
+				offset = -5.0;
+				clientDate = date;
+				utc = clientDate.getTime() + (clientDate.getTimezoneOffset() * 60000);
+				ESTDate = new Date(utc + (3600000*offset));
+				return ESTDate;
+			}
+
+			function populatePortfolio() {
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+						if (xhttp.readyState == 4 && xhttp.status == 200) {
+						document.getElementById("portfoliocontent").innerHTML = xhttp.responseText;
+					}
+				};
+				xhttp.open("GET", "http://localhost/Frontend/retrievePortfolioYahoo.php", true);
+				xhttp.send();
+				$(function(){
+					$("#portfolio").css('overflow-y', 'top');
+				});
+			}
+
+			function populateWatchlist() {
+				var xhttp1 = new XMLHttpRequest();
+				xhttp1.onreadystatechange = function() {
+						if (xhttp1.readyState == 4 && xhttp1.status == 200) {
+						document.getElementById("watchlistcontent").innerHTML = xhttp1.responseText;
+					}
+				};
+				xhttp1.open("GET", "http://localhost/Frontend/retrieveWatchlistYahoo.php", true);
+				xhttp1.send();
+				$(function(){
+					$("#watchlist").css('overflow-y', 'top');
+				});
+			}
+
+			function onLoad() {
+				startTime();
+				populatePortfolio();
+				populateWatchlist();
+			}
+
 		</script>
 
 	</head>
 
-	<body onload="startTime()">
+	<body onload="onLoad()">
 
 		<h1>Your Dashboard</h1>
 
 		<div id = "dashboard">
 
 			<div class="widget" id="import">
-				<h2>Import</h2>
-				<button type="button">Import CSV</button>
+				<h2>Import Portfolio</h2>
+				<form action="http://localhost/Frontend/importcsv.php" method="post" enctype="multipart/form-data">
+					<input type="file" name="fileToUpload" id="fileToUpload">
+					<input type="submit" value="Upload CSV" name="submit">
+				</form>
 			</div>
 
 			<div class="widget" id="search">
 				<h2>Search</h2><br>
-				<form action="">
-					<input type="text" placeholder = "Company Name or Ticker" size = "40">
-					<input type="submit" value="Search">
+				<form action="searchbar.php" method="POST">
+					<div class="ui-widget">
+						<input id="tickersearchbar" type="text" placeholder = "Company Name or Ticker" size = "40">
+					</div>
+					<input type="submit" value="Graph" name="graph">
+					<input type="submit" value="Add to Watchlist" name="watch">
 				</form>
 			</div>
 
@@ -55,11 +132,14 @@
 				<div id="clock">Sun Feb 21 2016<br>05:49:08</div>
 				Account Balance: CA$H<br>
 				Portfolio Value: MONEY<br>
-				<button type="button">Logout</button>
+				<button type="button" id="logoutbutton">Logout</button>
 			</div>
 
 			<div class="widget" id="portfolio">
 				<h2>Portfolio Scroll List</h2>
+				<div id="portfoliocontent">
+					<br><br><br><img src="images/ajax-loader.gif" alt="loading..." style="width:32px;height:32px;">
+				</div>
 			</div>
 			
 			<div class="widget" id="graph">
@@ -78,8 +158,8 @@
 				<input type="text" placeholder="Ticker" size = "2">
 				<input type="text" placeholder="Company Name" size = "6"><br><br>
 				<input type="text" placeholder="Quantity" size = "10"><br><br>
-				<input type="submit" value="Buy">
-				<input type="submit" value="Sell">
+				<input type="submit" value="Buy" id = "buybutton">
+				<input type="submit" value="Sell" id = "sellbutton">
 				</form>
 			</div>
 
@@ -95,11 +175,73 @@
 
 			<div class="widget" id="watchlist">
 				<h2>Watchlist</h2>
-				
+				<div id="watchlistcontent">
+					<br><br><br><img src="images/ajax-loader.gif" alt="loading..." style="width:32px;height:32px;">
+				</div>
 			</div>
 
 		</div>
 
+		<script>
+			<!-- JQuery Autocomplete Tutorial
+			http://www.tutorialspoint.com/jqueryui/jqueryui_autocomplete.htm#autocomplete_methods -->
+			document.getElementById('tickersearchbar').oninput = function ()
+			{
+				$(function()
+				{
+					var searchVal = document.getElementById('tickersearchbar').value;
+					var url = 'http://d.yimg.com/aq/autoc?query=';
+					url += searchVal;
+					url += '&region=US&lang=en-US&callback=?'
+
+					var stocks = [];
+					$.getJSON(url, function(json)
+					{
+						var results = json.ResultSet.Result;
+						results.forEach(function(stock)
+						{
+							stocks.push(stock.symbol + " (" +stock.name + ")");
+						});
+					});
+
+		            $( "#tickersearchbar" ).autocomplete({
+		            	select:function(event, ui){
+		            		var ticker = ui.item.label.split(" ")[0];
+		            		$("#tickersearchbar").val(ticker);
+		            		return false;
+					    },
+					    source: stocks
+		            });
+		        });
+			}
+
+			function logout() {
+				window.location.href = "http://localhost/Frontend/logout.php";
+			}
+
+			document.getElementById("logoutbutton").onclick = function() {
+				// https://github.com/JillElaine/jquery-idleTimeout
+				// logs out of all Stock Portfolio Tracker tabs
+				$.fn.idleTimeout().logout();
+				logout();
+			}
+
+			// https://github.com/JillElaine/jquery-idleTimeout
+			$(document).ready(function () {
+			    $(document).idleTimeout({
+			   		// redirect (logout) on timeout
+				    redirectUrl:  "http://localhost/Frontend/logout.php",
+
+				    // idle settings
+				    idleTimeLimit: 240,           // 'No activity' time limit in seconds. 240 = 4 Minutes (Total 5 minutes of inactivity for automatic logout)
+				    idleCheckHeartbeat: 2,       // Frequency to check for idle timeouts in seconds
+
+				    // warning dialog box configuration
+				    enableDialog: true,           // set to false for logout without warning dialog
+				    dialogDisplayLimit: 60,       // Time to display the warning dialog before logout (and optional callback) in seconds. 60 = 1 Minute (Total 5 minutes of inactivity for automatic logout)
+			    });
+			});
+		</script>
 	</body>
 
 	<footer>
