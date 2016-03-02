@@ -25,6 +25,14 @@
             }   
           }
 
+          public function addOwnedStock($tickerSymbol, $newStock){
+            $this->ownedStock[$tickerSymbol] = $newStock;
+          }
+
+          public function addTrackedStock($tickerSymbol, $newStock){
+            $this->trackedStock[$tickerSymbol] = $newStock;
+          }
+
           //Create a portfolio for someone uploading their CSV.
           public function createPortfolio($stockTickerNames,$associativeNumber,$associativeDate,$associativePrice){
 
@@ -79,8 +87,8 @@
 
                 if($accountBalance < ($numShares * $purchasePrice)){
                   $failedOrder = "Insufficient funds. Transaction failed.";
-                echo "<script type='text/javascript'>alert('$failedOrder');</script>";
-                          return;
+                  echo "<script type='text/javascript'>alert('$failedOrder');</script>";
+                  return;
                 }
 
                 //if user does not already own shares of this stock, add to stockNames
@@ -203,9 +211,9 @@
                  $objYahooStock->addFormat("snl1d1t1c1p2"); 
                  $objYahooStock->addStock($stockTicker);
                  foreach( $objYahooStock->getQuotes() as $code => $stock)
-                    {
-                      $price = floatval($stock[2]);
-                    }
+                  {
+                    $price = floatval($stock[2]);
+                  }
 
                  $newBalance = $accountBalance + ($price * $numShares);
 
@@ -228,7 +236,6 @@
                }
           }
      }
-
      ?>
 
 </body>

@@ -121,23 +121,29 @@
 	}
 
 	function createNewPortfolioInParse($stockTickerNames, $stockTickerShares, $stockTickerDates, $stockTickerPrices){
-		$newPortfolio = new ParseObject("Portfolio");
-
-		$newPortfolio->set("username", $_SESSION["account"] -> username);
-		$newPortfolio->set("accountBalance", 10000);
-		$newPortfolio->setArray("stockNames", $stockTickerNames);
-		$newPortfolio->setAssociativeArray("purchaseDates", $stockTickerDates);
-		$newPortfolio->setAssociativeArray("purchasePrices", $stockTickerPrices);
-		$newPortfolio->setAssociativeArray("numberShares", $stockTickerShares);
-
+		$queryPortfolio = new ParseQuery("Portfolio");
+		$queryPortfolio->equalTo("username", $_SESSION['account']->getUsername());
 		try {
-		  $newPortfolio->save();
-		  echo 'New object created with objectId: ' . $newPortfolio->getObjectId();
-		} catch (ParseException $ex) {  
-		  // Execute any logic that should take place if the save fails.
-		  // error is a ParseException object with an error code and message.
-		  echo 'Failed to create new object, with error message: ' . $ex->getMessage();
+			 	$newPortfolio = $queryPortfolio->first();
+				$newPortfolio->setArray("stockNames", $stockTickerNames);
+				$newPortfolio->setAssociativeArray("purchaseDates", $stockTickerDates);
+				$newPortfolio->setAssociativeArray("purchasePrices", $stockTickerPrices);
+				$newPortfolio->setAssociativeArray("numberShares", $stockTickerShares);
+
+				try {
+				  $newPortfolio->save();
+				} catch (ParseException $ex) {  
+				  // Execute any logic that should take place if the save fails.
+				  // error is a ParseException object with an error code and message.
+				  echo 'Failed to create new object, with error message: ' . $ex->getMessage();
+				}
 		}
+		catch (ParseException $ex) {  
+				  // Execute any logic that should take place if the save fails.
+				  // error is a ParseException object with an error code and message.
+				  echo 'Failed to retrieve portfolio, with error message: ' . $ex->getMessage();
+		}
+
 	}
 
 	uploadCSVToServer();

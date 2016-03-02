@@ -1,10 +1,8 @@
-
 <html>
 <body>
-
 	 <?php 
 
-//Allow for errors to be displayed
+		//Allow for errors to be displayed
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
@@ -109,10 +107,6 @@
 		   	       	$_SESSION['account'] =  $accountObj;
 
 		   	    }
-
-
-
-
 
 				echo "<script type='text/javascript'>alert('$message');</script>";
 				readfile("http://localhost/Frontend/dashboard.html");
