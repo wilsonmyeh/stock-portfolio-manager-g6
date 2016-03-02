@@ -171,12 +171,12 @@ JQuery Plugin for idle timeout
 
 			<div class="widget" id="buysell">
 				<h2>Stock Trader</h2><br>
-				<form action="">
-				<input type="text" placeholder="Ticker" size = "2">
-				<input type="text" placeholder="Company Name" size = "6"><br><br>
-				<input type="text" placeholder="Quantity" size = "10"><br><br>
-				<input type="submit" value="Buy" id = "buybutton">
-				<input type="submit" value="Sell" id = "sellbutton">
+				<form action="http://localhost/Frontend/buySellStock.php" method = "POST">
+				<input type="text" placeholder="Ticker" name = "ticker" size = "2" required>
+				<input type="text" placeholder="Company Name" name = "compName" size = "6" required><br><br>
+				<input type="text" placeholder="Quantity" name = "quantity" size = "10" required><br><br>
+				<input type="submit" name = "action" value="Buy">
+				<input type="submit" name = "action" value="Sell">
 				</form>
 			</div>
 

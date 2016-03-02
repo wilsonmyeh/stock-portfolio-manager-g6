@@ -30,7 +30,6 @@
 
 			if($_POST['action'] == 'Buy'){
 				$globalAccount = $_SESSION['account'];
-				echo(var_dump($globalAccount));
 				$tickerName = $_POST["ticker"];
 				$stockQuantity = $_POST["quantity"];
 				

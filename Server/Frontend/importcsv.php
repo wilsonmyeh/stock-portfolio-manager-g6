@@ -3,6 +3,15 @@
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
 
+	include_once('../Portfolio.class.php');
+	include_once('../Account.class.php');
+	include_once('../Stock.class.php');
+	include_once('../TrackedStock.class.php');
+	include_once('../OwnedStock.class.php');
+
+	 //Enable global variables
+	 session_start();
+
 	require '../../vendor/autoload.php';
 	use Parse\ParseClient;
 	use Parse\ParseObject;
@@ -138,6 +147,29 @@
 		  // error is a ParseException object with an error code and message.
 		  echo 'Failed to create new object, with error message: ' . $ex->getMessage();
 		}
+	}
+
+	function populatePortfolio($stockTickerNames, $stockTickerShares, $stockTickerDates, $stockTickerPrices){
+		//Load global variable
+		$globalAccount = $_SESSION['account'];
+
+		 $stockArray = array(); //owned stock array
+
+		  //Create n array of the owned stock to be added to the portfolio
+		  for($x = 0; $x < count($stockTickerNames);$x++){
+  	        	$ownedStock = new OwnedStock();
+				 $ownedStock->setTicker($stockTickerNames[$x]);
+		      	$ownedStock->setInitialDate($stockTickerDatesv[$stockTickerNames[$x]]);
+		  		$ownedStock->setInitialPurchasePrice($stockTickerPrices[$stockTickerNames[$x]]);
+		   	    $ownedStock->setNumberOwned($stockTickerShares[$stockTickerNames[$x]]);
+
+		   	    array_push($stockArray,$ownedStock);
+		   }
+		   	$globalAccount->getPortfolio()->createOwnedStocks($stockTickerNames,$stockArray);
+
+		 $_SESSION['account'] =  $globalAccount;
+
+
 	}
 
 	uploadCSVToServer();
