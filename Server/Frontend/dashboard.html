@@ -92,10 +92,27 @@ JQuery Plugin for idle timeout
 				});
 			}
 
+			// http://stackoverflow.com/questions/10943544/how-to-parse-an-rss-feed-using-javascript
+			function populateNewsWidget() {
+				var xhttp1 = new XMLHttpRequest();
+				xhttp1.onreadystatechange = function() {
+						if (xhttp1.readyState == 4 && xhttp1.status == 200) {
+						document.getElementById("newscontent").innerHTML = xhttp1.responseText;
+					}
+				};
+				xhttp1.open("GET", "http://localhost/Frontend/retrieveNewsMarketpulse.php", true);
+				xhttp1.send();
+
+				$(function(){
+					$("#news").css('overflow-y', 'top');
+				});
+			}
+
 			function onLoad() {
 				startTime();
 				populatePortfolio();
 				populateWatchlist();
+				populateNewsWidget();
 			}
 
 		</script>
@@ -170,7 +187,9 @@ JQuery Plugin for idle timeout
 
 			<div class="widget" id="news">
 				<h2>News</h2>
-				
+				<div id="newscontent">
+					<br><br><br><img src="images/ajax-loader.gif" alt="loading..." style="width:32px;height:32px;">
+				</div>
 			</div>
 
 			<div class="widget" id="watchlist">
