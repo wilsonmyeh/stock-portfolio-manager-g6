@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -11,9 +11,26 @@ use Parse\ParseObject;
 use Parse\ParseQuery;
 ParseClient::initialize('YtTIOIVkgKimi9f3KgvmhAm9be09KaFPD0lK1r21', 'Bxf6gl3FUT0goWvvx3DIger9bcOjwY1LflXr6MIO', 'r86cSKPWagMCavzJXVF4OFnte5yPpNY74GhY9UxS');
 
+	$name = "AAPL";
+	$num = 2;
+
 
 	//**************update global object*************
-	function sellStock($stockTicker, $numShares, $purchasePrice){
+	function watchStock($stockTicker){
+		//first check if the user already has a watchlist
+		$queryWatchlist = new ParseQuery("Watchlist");
+		$queryWatchlist -> equalTo("username", username);
+		try{
+			$watchlist = $queryWatchlist->first();
+			$stockNames = $watchlist -> get("stockNames");
+			
+		}
+	}
+
+
+	// sellStock($name, $num);
+	//**************update global object*************
+	function sellStock($stockTicker, $numShares){
 		$queryStock = new ParseQuery("Portfolio");
 		///////USE GLOBAL OBJECT USERNAME
 		$queryStock->equalTo("username", "rebecca@usc.edu");
@@ -30,7 +47,6 @@ ParseClient::initialize('YtTIOIVkgKimi9f3KgvmhAm9be09KaFPD0lK1r21', 'Bxf6gl3FUT0
 		  foreach($stockNames as $code => $stock){
      		if( (string)$stock == (string)$stockTicker){
      			$found = true;
-     			echo 'already own this stock';
      		}
      	  }
 
@@ -67,7 +83,16 @@ ParseClient::initialize('YtTIOIVkgKimi9f3KgvmhAm9be09KaFPD0lK1r21', 'Bxf6gl3FUT0
      	  }
 
      	  //update account balance
-     	  $newBalance = $accountBalance + ($purchasePrice * $numShares);
+     	  //get the current price of this stock from Yahoo
+     	  $objYahooStock = new YahooStock;
+     	  $objYahooStock->addFormat("snl1d1t1c1p2"); 
+     	  $objYahooStock->addStock($stockTicker);
+     	  foreach( $objYahooStock->getQuotes() as $code => $stock)
+			{
+			  $price = floatval($stock[2]);
+			}
+
+     	  $newBalance = $accountBalance + ($price * $numShares);
      	  // echo $numShares; </br></br>
      	  $portfolio->set("accountBalance", $newBalance);
 
@@ -76,7 +101,6 @@ ParseClient::initialize('YtTIOIVkgKimi9f3KgvmhAm9be09KaFPD0lK1r21', 'Bxf6gl3FUT0
 
      	  try{ //save this update to parse
 			  $portfolio->save();
-			  echo 'updated stock names when buying stock ' . $portfolio->getObjectId();
 			} catch (ParseException $ex) {  
 			  echo 'Failed to update stock names when buying stock ' . $ex->getMessage();
 			}
@@ -89,15 +113,6 @@ ParseClient::initialize('YtTIOIVkgKimi9f3KgvmhAm9be09KaFPD0lK1r21', 'Bxf6gl3FUT0
 		}
 	}
 
-
-
-
-
-	// function watchStock(stockTicker, username){ //this adds the stock to the user's watchlist
-		
-	// }
-
-
 	// function removeFromWatchList(stockTicker){
 
 	// }
@@ -106,7 +121,7 @@ ParseClient::initialize('YtTIOIVkgKimi9f3KgvmhAm9be09KaFPD0lK1r21', 'Bxf6gl3FUT0
 	$name = "COST";
 	$num = 90;
 	$purchasePrice = 80000;
-	buyStock($name, $num, $purchasePrice);
+	// buyStock($name, $num, $purchasePrice);
 
 	//**************update global object*************
 	function buyStock($stockTicker, $numShares, $purchasePrice){
@@ -172,6 +187,7 @@ ParseClient::initialize('YtTIOIVkgKimi9f3KgvmhAm9be09KaFPD0lK1r21', 'Bxf6gl3FUT0
      	  // echo $numShares; </br></br>
      	  $portfolio->set("accountBalance", $newBalance);
 
+     	  readfile("http://localhost/Frontend/dashboard.html");
 		  $successfulOrder = "Transaction successful!";
 		  echo "<script type='text/javascript'>alert('$successfulOrder');</script>";
 
@@ -190,14 +206,33 @@ ParseClient::initialize('YtTIOIVkgKimi9f3KgvmhAm9be09KaFPD0lK1r21', 'Bxf6gl3FUT0
 		}
 	}
 
-	// pullPortfolioDataFromYahoo();
+
+	//summarizes the total value of the current portfolio
+	function getNetValue(){
+		$objYahooStock = new YahooStock;
+		$objYahooStock -> addFormat("snl1d1c1p2");
+		foreach(ownedStocks as $code => $stock){
+     		$objYahooStock->addStock((string)$stock);
+    	}
+    	$netValue = 0;
+    	foreach($objYahooStock->getQuotes() as $code => $stock){
+    		$netValue = $netValue + floatval($stock[2]);
+    	}
+    	echo $netValue;
+	}
 
 	//takes an array of stock names like: array("AAPL", "GOOG", "AMZN", "FB");
-	function pullPortfolioDataFromYahoo($stockNames){
+	function pullStockDataFromYahoo($stockType){
 		$objYahooStock = new YahooStock;
 		$objYahooStock->addFormat("snl1d1c1p2"); 
 
-		//*****UPDATE LOCAL VARIABLES*****$stockNames = _SESSION["ownedStocks"];
+		$stockNames;
+		if($stockType == 1){ //if trying to pull data on owned stocks
+			$stockNames = _SESSION["account"] -> portfolio -> ownedStocks;
+		}
+		else{ //if trying to pull data on 
+			$stockNames = _SESSION["account"] -> portfolio -> ownedStocks;
+		}
 		foreach($stockNames as $code => $stock){
      		$objYahooStock->addStock((string)$stock);
     	}
