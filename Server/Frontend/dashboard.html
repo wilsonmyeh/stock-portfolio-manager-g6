@@ -17,6 +17,12 @@ JQuery Plugin for idle timeout
 -->
 <script src="plugins/jquery-idleTimeout.min.js"></script>
 
+<!-- Load google chart's source -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	    
+<!-- Load our chart javascript functions -->
+<script type="text/javascript" src="graphFunctions.js"></script>
+
 <html>
 
 	<head>
@@ -93,6 +99,7 @@ JQuery Plugin for idle timeout
 			}
 
 			// http://stackoverflow.com/questions/10943544/how-to-parse-an-rss-feed-using-javascript
+			// RSS feed of stock market news from MarketPulse
 			function populateNewsWidget() {
 				var xhttp1 = new XMLHttpRequest();
 				xhttp1.onreadystatechange = function() {
@@ -161,6 +168,7 @@ JQuery Plugin for idle timeout
 			
 			<div class="widget" id="graph">
 				<h2>Main Line Graph</h2>
+				<div id="graph_here"></div>
 			</div>
 
 			<div class="widget" id="manualandlegend">
@@ -182,7 +190,7 @@ JQuery Plugin for idle timeout
 
 			<div class="widget" id="detailedinfo">
 				<h2>Detailed Stock Information</h2>
-
+				<div id="details"></div>
 			</div>
 
 			<div class="widget" id="news">
@@ -246,6 +254,7 @@ JQuery Plugin for idle timeout
 			}
 
 			// https://github.com/JillElaine/jquery-idleTimeout
+			// idle time-out
 			$(document).ready(function () {
 			    $(document).idleTimeout({
 			   		// redirect (logout) on timeout
