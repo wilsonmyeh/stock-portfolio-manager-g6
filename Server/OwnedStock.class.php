@@ -1,4 +1,3 @@
-<html>
 <body>	
 	<?php
 		class OwnedStock extends Stock{
@@ -6,7 +5,7 @@
 			private $numberOwned;
 
 			public function getInitialPurchasePrice(){
-				return $initialPurchasePrice;
+				return $this->initialPurchasePrice;
 			}
 
 			public function setInitialPurchasePrice($initialPurchasePrice){
@@ -14,7 +13,7 @@
 			}
 
 			public function getNumberOwned(){
-				return $numberOwned;
+				return $this->numberOwned;
 			}
 
 			public function setNumberOwned($numberOwned){
@@ -23,4 +22,3 @@
 		}
 	?>
 </body>
-</html>

@@ -1,6 +1,6 @@
 <?php
-	//enable global variables
-	session_start();
+	// //enable global variables
+	// session_start();
 
 	include_once('../Portfolio.class.php');
 	include_once('../Account.class.php');
@@ -9,6 +9,9 @@
 	include_once('../OwnedStock.class.php');
 	include_once('YahooFinance.php');
 
+	//enable global variables
+	session_start();
+
 	//Allow for errors to be displayed
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
@@ -16,16 +19,17 @@
 	
  	header("Access-Control-Allow-Origin: *");
 
+ 	pullWatchlistDataFromYahoo();
 	function pullWatchlistDataFromYahoo(){
 		$objYahooStock = new YahooStock;
 		$objYahooStock->addFormat("snl1d1c1p2"); 
 
-		$stockNames = array_keys(_SESSION["account"] -> getPortfolio() -> getTrackedStock());
+		$stockNames = array_keys($_SESSION['account'] -> getPortfolio() -> getTrackedStock());
 		
 		foreach($stockNames as $code => $stock){
 			$objYahooStock->addStock((string)$stock);
 		}
-
+// 
 		foreach( $objYahooStock->getQuotes() as $code => $stock){
 
 			?>
@@ -58,5 +62,5 @@
 		}	
 	}
 
-	pullWatchlistDataFromYahoo();
+	// pullWatchlistDataFromYahoo();
 ?>

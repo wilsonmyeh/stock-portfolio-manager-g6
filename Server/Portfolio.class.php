@@ -1,7 +1,5 @@
-<html>
 <body>  
   <?php
-  session_start();
 
   require '../../vendor/autoload.php';
   use Parse\ParseClient;
@@ -310,4 +308,3 @@
   ?>
 
   </body>
-  </html>

@@ -1,4 +1,3 @@
-<html>
 <body>	
 	<?php
 		class Account{
@@ -29,4 +28,3 @@
 		}
 	?>
 </body>
-</html>

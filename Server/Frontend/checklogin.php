@@ -1,7 +1,5 @@
-<html>
 <body>
 	 <?php 
-
 	 	//Enable global variables
 	 	session_start();
 
@@ -15,6 +13,9 @@
 		include_once('../Stock.class.php');
 		include_once('../TrackedStock.class.php');
 		include_once('../OwnedStock.class.php');
+
+		// //Enable global variables
+	 // 	session_start();
 	 	
 	
 		//Initialize parse and the classes it needs
@@ -25,8 +26,6 @@
 		use Parse\ParseQuery;
 		ParseClient::initialize('YtTIOIVkgKimi9f3KgvmhAm9be09KaFPD0lK1r21', 'Bxf6gl3FUT0goWvvx3DIger9bcOjwY1LflXr6MIO', 'r86cSKPWagMCavzJXVF4OFnte5yPpNY74GhY9UxS');
 		
-
-
 	 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		
 	 	//Get input from text fields in login.html
@@ -128,4 +127,3 @@
 	 	
 	 ?> 
 </body>
-</html>

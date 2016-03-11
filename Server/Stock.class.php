@@ -20,7 +20,7 @@ abstract class Stock
 	}
 
 	public function getTicker(){
-		return (string)$ticker;
+		return (string)$this->ticker;
 	}
 
 	public function setTicker($ticker){
@@ -28,7 +28,7 @@ abstract class Stock
 	}
 
 	public function getCurrentValue(){
-		return $currentValue;
+		return $this->currentValue;
 	}
 
 	public function setCurrentValue($currentValue){
@@ -36,7 +36,7 @@ abstract class Stock
 	}
 
 	public function getCompanyName(){
-		return $companyName;
+		return $this->companyName;
 	}
 
 	public function setCompanyName($companyName){
@@ -44,7 +44,7 @@ abstract class Stock
 	}
 
 	public function getInitialDate(){
-		return $initialDate;
+		return $this->initialDate;
 	}
 
 	public function setInitialDate($initialDate){

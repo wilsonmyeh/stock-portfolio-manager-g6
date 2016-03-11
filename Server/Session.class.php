@@ -6,5 +6,4 @@ class Session {
 	public $graph;
 	
 }
-
 ?>
