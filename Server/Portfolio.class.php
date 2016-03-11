@@ -13,6 +13,7 @@
   include_once('../TrackedStock.class.php');
   include_once('../OwnedStock.class.php');
 
+  session_start();
 
   class Portfolio{
 
@@ -152,6 +153,7 @@
                   $ownedStock->setNumberOwned($numShares);
 
                   $this->ownedStock[$stockTicker] = $ownedStock;
+                  ksort($ownedStock);
                 }
 
                   //update account balance
@@ -225,28 +227,28 @@
                 }
 
                 //remove it from purhcaseDates
-                if (($dateKey = array_search($stockTicker, $stockPurchaseDates)) !== false) {
-                  unset($stockPurchaseDates[$dateKey]);
+                // if (($dateKey = array_search($stockTicker, $stockPurchaseDates)) !== false) {
+                  unset($stockPurchaseDates[$stockTicker]);
                   $portfolio->setAssociativeArray("purchaseDates", $stockPurchaseDates);    
-                }
+                // }
 
-                //remove it from purchasePrices
-                if (($priceKey = array_search($stockTicker, $stockPurchasePrices)) !== false) {
-                  unset($stockPurchasePrices[$priceKey]);
+                // remove it from purchasePrices
+                // if (($priceKey = array_search($stockTicker, $stockPurchasePrices)) !== false) {
+                  unset($stockPurchasePrices[$stockTicker]);
                   $portfolio->setAssociativeArray("purchasePrices", $stockPurchasePrices);    
-                }
+                // }
 
                 //remove it from numberShares
-                if (($shareKey = array_search($stockTicker, $stockNumberShares)) !== false) {
-                  unset($stockNumberShares[$shareKey]);
+                // if (($shareKey = array_search($stockTicker, $stockNumberShares)) !== false) {
+                  unset($stockNumberShares[$stockTicker]);
                   $portfolio->setAssociativeArray("numberShares", $stockNumberShares);    
-                }
+                // }
 
 
                 //remove it from local list of owned stocks
-                if (($dateKey = array_search($stockTicker, $this->ownedStock)) !== false) {
+                // if (($dateKey = array_search($stockTicker, $this->ownedStock)) !== false) {
                   unset($this->ownedStock[$stockTicker]);
-                }     
+                // }     
             }
 
             else{ //else, they still own at least 1 share of that stock 

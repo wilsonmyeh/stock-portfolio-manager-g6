@@ -1,6 +1,4 @@
 <?php
-	//Enable global variables
- 	session_start();
 
 	include_once('../Portfolio.class.php');
 	include_once('../Account.class.php');
@@ -8,6 +6,9 @@
 	include_once('../TrackedStock.class.php');
 	include_once('../OwnedStock.class.php');
 	include_once('YahooFinance.php');
+
+	//Enable global variables
+ 	session_start();
 
 
  	//Allow for errors to be displayed

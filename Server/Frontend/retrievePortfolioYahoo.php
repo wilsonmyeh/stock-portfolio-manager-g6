@@ -36,16 +36,31 @@
 			$objYahooStock->addStock((string)$stock);
 		}
 
-		//Quantity: <?php echo $stockObjects[(string)$[stock[0]]]-> getNumberOwned();
     	foreach( $objYahooStock->getQuotes() as $code => $stock){
 	      ?>
+	      <!doctype html>
+
+			<html>
+
+			<link rel="stylesheet" type="text/css" href="style.css">
+			
+			<div class="stockmodule" id=<?php echo $stock[0]; ?> >
+
 	      Ticker: <?php echo $stock[0]; ?> <br />
 	      Company Name: <?php echo $stock[1]; ?> <br />
-	      Last Trade Price: <?php echo'$ '.$stock[2]; ?> <br />
+	      Quantity: <?php echo $stockObjects[ $stock[0] ] -> getNumberOwned(); ?> <br />
+	      Last Trade Price: </b> <span class="money"><?php echo'$ '.$stock[2]; ?></span> <br />
 	      Last Trade Date: <?php echo $stock[3]; ?> <br />
-	      Dollar Change: <?php echo '$ '. $stock[4]; ?> <br />
-	      Percent Change: <?php echo $stock[5]; ?> <br /><br />
+	      Dollar Change: </b>  <span class="money"><?php echo '$ '. $stock[4]; ?></span> <br />
+	      Percent Change: </b> <span class="money"><?php echo $stock[5]; ?></span> <br />
+
+	      </div>
+
+			</html>
+
 	      <?php
+
+
 	    }
 		
 	}

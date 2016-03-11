@@ -58,7 +58,8 @@
 				echo "<script type='text/javascript'>alert('$message');</script>";
 				parseCSVToArrays(basename($_FILES["fileToUpload"]["name"]));
 			} else {
-				//echo "Sorry, there was an error uploading your file.";
+				echo "Sorry, there was an error uploading your file.";
+				// echo "<script type='text/javascript'>alert('oops');</script>"
 			}
 		}
 		
@@ -132,7 +133,7 @@
 
 	function createNewPortfolioInParse($stockTickerNames, $stockTickerShares, $stockTickerDates, $stockTickerPrices){
 		$queryPortfolio = new ParseQuery("Portfolio");
-		$queryPortfolio->equalTo("username", (string)$_SESSION['account']->getUsername());
+		$queryPortfolio->equalTo("username", $_SESSION['account']->getUsername());
 		try {
 			 	$newPortfolio = $queryPortfolio->first();
 				$newPortfolio->setArray("stockNames", $stockTickerNames);
