@@ -67,6 +67,7 @@
 
     public function addTrackedStock($tickerSymbol, $newStock){
       $this->trackedStock[$tickerSymbol] = $newStock;
+      ksort($this->trackedStock);
     }
 
           //query from parse for this user's watchlist. if they already have one, create
