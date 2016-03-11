@@ -71,6 +71,17 @@ JQuery Plugin for idle timeout
 				return ESTDate;
 			}
 
+			function populateBalance() {
+				var xhttp1 = new XMLHttpRequest();
+				xhttp1.onreadystatechange = function() {
+						if (xhttp1.readyState == 4 && xhttp1.status == 200) {
+						document.getElementById("balances").innerHTML = xhttp1.responseText;
+					}
+				};
+				xhttp1.open("GET", "http://localhost/Frontend/retrieveBalanceValue.php", true);
+				xhttp1.send();
+			}
+
 			function populatePortfolio() {
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function() {
@@ -118,6 +129,7 @@ JQuery Plugin for idle timeout
 
 			function onLoad() {
 				startTime();
+				populateBalance();
 				populatePortfolio();
 				populateWatchlist();
 				populateNewsWidget();
@@ -155,8 +167,7 @@ JQuery Plugin for idle timeout
 			<div class="widget" id="account">
 				<h2>Your Account</h2>
 				<div id="clock">Sun Feb 21 2016<br>05:49:08</div>
-				Account Balance: CA$H<br>
-				Portfolio Value: MONEY<br>
+				<span id="balances"></span>
 				<button type="button" id="logoutbutton">Logout</button>
 			</div>
 

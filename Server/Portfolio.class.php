@@ -72,6 +72,10 @@
      return $this->username;
    }
 
+   public function removeWatchedStock($tickerName){
+      unset($this->trackedStock[$tickerName]);
+   }
+
    public function setBankBalance($bankBalance){
     $this->bankBalance = $bankBalance;
   }
