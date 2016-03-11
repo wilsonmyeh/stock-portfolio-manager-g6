@@ -58,11 +58,11 @@
     }
 
     public function getOwnedStock(){
-      return $ownedStock;
+      return $this->ownedStock;
     }
 
     public function getTrackedStock(){
-      return $trackedStock;
+      return $this->trackedStock;
     }
 
     public function setUsername($username){
@@ -70,7 +70,7 @@
    }
 
    public function getUsername(){
-     return $username;
+     return $this->username;
    }
 
    public function setBankBalance($bankBalance){
@@ -78,7 +78,7 @@
   }
 
   public function getBankBalance(){
-    return $bankBalance;
+    return $this->bankBalance;
   }
 
   public function buyStock($stockTicker, $numShares, $purchasePrice){

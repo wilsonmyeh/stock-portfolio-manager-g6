@@ -13,9 +13,6 @@ include_once('../Stock.class.php');
 include_once('../TrackedStock.class.php');
 include_once('../OwnedStock.class.php');
 
-
-	
-
 //Initialize parse and the classes it needs
 require '../../vendor/autoload.php';
 use Parse\ParseUser;
