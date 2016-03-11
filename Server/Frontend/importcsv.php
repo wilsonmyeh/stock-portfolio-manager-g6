@@ -70,8 +70,8 @@
 		
 	}
 
-	function parseCSVToArrays($CSVFilename){
-		$file = fopen("portfolio.csv","r");
+	function parseCSVToArrays($target_file){
+		$file = fopen($target_file,"r");
 		$header = fgetcsv($file);
 		while($row = fgetcsv($file)){
 			$stockTickerNames[] = $row[0];
@@ -85,7 +85,7 @@
 		$stockTickerDates = array_flip($stockTickerDates);
 		$stockTickerPrices = array_flip($stockTickerPrices);
 
-		$file = fopen("portfolio.csv","r");
+		$file = fopen($target_file,"r");
 		$header = fgetcsv($file);
 		foreach(array_keys($stockTickerShares) as $key) {
 			$row = fgetcsv($file);
@@ -93,7 +93,7 @@
 		}
 		fclose($file);
 
-		$file = fopen("portfolio.csv","r");
+		$file = fopen($target_file,"r");
 		$header = fgetcsv($file);
 		foreach(array_keys($stockTickerDates) as $key) {
 			$row = fgetcsv($file);
@@ -101,7 +101,7 @@
 		}
 		fclose($file);
 
-		$file = fopen("portfolio.csv","r");
+		$file = fopen($target_file,"r");
 		$header = fgetcsv($file);
 		foreach(array_keys($stockTickerPrices) as $key) {
 			$row = fgetcsv($file);
