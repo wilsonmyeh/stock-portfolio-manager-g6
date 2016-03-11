@@ -1,7 +1,5 @@
+<?php
+	class TrackedStock extends Stock{
 
-	<?php
-
-		class TrackedStock extends Stock{
-
-		}
-	?>
+	}
+?>
