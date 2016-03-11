@@ -12,6 +12,7 @@
   include_once('../Stock.class.php');
   include_once('../TrackedStock.class.php');
   include_once('../OwnedStock.class.php');
+  include_once('YahooFinance.php');
 
   session_start();
 
