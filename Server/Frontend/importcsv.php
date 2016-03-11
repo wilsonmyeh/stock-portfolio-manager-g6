@@ -1,6 +1,4 @@
 <?php
-	//Enable global variables
-	session_start();
 
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
@@ -11,6 +9,9 @@
 	include_once('../Stock.class.php');
 	include_once('../TrackedStock.class.php');
 	include_once('../OwnedStock.class.php');
+
+	//Enable global variables
+	session_start();
 
 	require '../../vendor/autoload.php';
 	use Parse\ParseClient;
@@ -69,8 +70,8 @@
 		
 	}
 
-	function parseCSVToArrays($CSVFilename){
-		$file = fopen("portfolio.csv","r");
+	function parseCSVToArrays($target_file){
+		$file = fopen($target_file,"r");
 		$header = fgetcsv($file);
 		while($row = fgetcsv($file)){
 			$stockTickerNames[] = $row[0];
@@ -84,7 +85,7 @@
 		$stockTickerDates = array_flip($stockTickerDates);
 		$stockTickerPrices = array_flip($stockTickerPrices);
 
-		$file = fopen("portfolio.csv","r");
+		$file = fopen($target_file,"r");
 		$header = fgetcsv($file);
 		foreach(array_keys($stockTickerShares) as $key) {
 			$row = fgetcsv($file);
@@ -92,7 +93,7 @@
 		}
 		fclose($file);
 
-		$file = fopen("portfolio.csv","r");
+		$file = fopen($target_file,"r");
 		$header = fgetcsv($file);
 		foreach(array_keys($stockTickerDates) as $key) {
 			$row = fgetcsv($file);
@@ -100,7 +101,7 @@
 		}
 		fclose($file);
 
-		$file = fopen("portfolio.csv","r");
+		$file = fopen($target_file,"r");
 		$header = fgetcsv($file);
 		foreach(array_keys($stockTickerPrices) as $key) {
 			$row = fgetcsv($file);
@@ -177,9 +178,9 @@
 
 		   	    array_push($stockArray,$ownedStock);
 		   }
-		   	$globalAccount->getPortfolio()->createOwnedStocks($stockTickerNames,$stockArray);
+		   $globalAccount->getPortfolio()->createOwnedStocks($stockTickerNames,$stockArray);
 
-		 $_SESSION['account'] =  $globalAccount;
+		 $_SESSION['account'] = $globalAccount;
 
 
 	}

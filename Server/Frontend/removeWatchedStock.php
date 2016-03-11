@@ -1,5 +1,4 @@
 <?php
-	
 	include_once('../Portfolio.class.php');
 	include_once('../Account.class.php');
 	include_once('../Stock.class.php');
@@ -25,8 +24,6 @@
 	//this function will update the user's watchlist in parse and the local trackedStock object
 	function removeWatchedStock($tickerName){
 
-		readfile("http://localhost/Frontend/dashboard.html");
-
 		//getting the user's portfolio from Parse
 		$queryWatchlist = new ParseQuery("Watchlist");
 
@@ -35,22 +32,22 @@
 			$watchlist = $queryWatchlist->first();
 
 			// The object was retrieved successfully.
-				$stockNames = $watchlist->get("stockNames");
+			$stockNames = $watchlist->get("stockNames");
 
-				if (($tickerKey = array_search($tickerName, $stockNames)) !== false) { //if they are tracking the stock, remove it from them
-						unset($stockNames[$tickerKey]);
-						$watchlist->setArray("stockNames", $stockNames); //push update to parse
-					try{ //save this update to parse
-						$watchlist->save();
-					} 
-					catch (ParseException $ex) {  
-						echo 'Failed to update stock names when buying stock ' . $ex->getMessage();
-					}
+			if (($tickerKey = array_search($tickerName, $stockNames)) !== false) { //if they are tracking the stock, remove it from them
+					unset($stockNames[$tickerKey]);
+					$watchlist->setArray("stockNames", $stockNames); //push update to parse
+				try{ //save this update to parse
+					$watchlist->save();
+				} 
+				catch (ParseException $ex) {  
+					echo 'Failed to update stock names when buying stock ' . $ex->getMessage();
 				}
+			}
 			//update local object
-			if ( ($watchKey = array_search($tickerName, $_SESSION['account']->getPortflio()->getOwnedStock()))_ !== false) {
-                  unset($_SESSION['account']->getPortfolio()->getOwnedStock()[$watchKey]);
-             }
+			// if (($watchKey = array_search($tickerName, $_SESSION['account']->getPortflio()->getOwnedStock()))_ !== false) {
+			$_SESSION['account']->getPortfolio()->removeWatchedStock($tickerName);
+			// }
 		}
 
 		catch (ParseException $ex) {
@@ -58,7 +55,11 @@
 			// error is a ParseException with an error code and message.
 			echo 'error retrieving my portfolio';
 		}
+
+		
 	}
 
 	removeWatchedStock($_POST['ticker']);
+	readfile("http://localhost/Frontend/dashboard.html");
+
 ?>

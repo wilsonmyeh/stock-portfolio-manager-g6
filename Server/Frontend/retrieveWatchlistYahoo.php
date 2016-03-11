@@ -48,7 +48,7 @@
 				<b>Percent Change:</b> <span class="money"><?php echo $stock[5]; ?></span> <br />
 				<input type="checkbox">Graph
 				
-				<form action="http://localhost/Frontend/removeWatchedStock.php" method="post" enctype="multipart/form-data" style="display: inline;">
+				<form action="http://localhost/Frontend/removeWatchedStock.php" method="POST" enctype="multipart/form-data" style="display: inline;">
 					<input hidden type="text" name="ticker"  value = <?php echo $stock[0]; ?>>
 					<input type="submit" value="X">
 				</form>

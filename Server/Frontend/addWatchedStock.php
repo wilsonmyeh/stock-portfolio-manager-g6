@@ -1,6 +1,5 @@
 <?php
 	//enable global variables
-	session_start();
 
 	include_once('../Portfolio.class.php');
 	include_once('../Account.class.php');
@@ -8,6 +7,8 @@
 	include_once('../TrackedStock.class.php');
 	include_once('../OwnedStock.class.php');
 	include_once('YahooFinance.php');
+
+	session_start();
 
 	//Allow for errors to be displayed
 	ini_set('display_errors', 1);
@@ -23,8 +24,6 @@
 
 	//this function adds the stock to the user's watch list
 	function watchStock($tickerName){
-
-		readfile("http://localhost/Frontend/dashboard.html"); //makes it so that any alerts or echos stay on the dashboard
 
 		//get the user's portfolio from Parse
 		$queryWatchlist = new ParseQuery("Watchlist");
@@ -43,6 +42,7 @@
 		  		}
 		  	else{ //need to add it to the watchlist
 		  		array_push($stockNames, $tickerName);
+		  		sort($stockNames);
 
 		  		//update the local watchlist stock list
 		  		$trackedStock = new TrackedStock();
@@ -51,12 +51,14 @@
 
 		   	    //updating the watchlist in Parse
 		  		$watchlist->setArray("stockNames", $stockNames);
+
 		  		try{ //save this update to parse
 	  			 	$watchlist->save();
 	  			} 
 	  			catch (ParseException $ex) {  
 	  			 	echo 'Failed to update watchlist ' . $ex->getMessage();
 	  			}
+
 	  		}
 	   	}
 
@@ -65,6 +67,8 @@
 		 // error is a ParseException with an error code and message.
 			echo 'error retrieving my watchlist';
 		}
+
+		readfile("http://localhost/Frontend/dashboard.html"); //makes it so that any alerts or echos stay on the dashboard
 	}
 
 	watchStock($stockToWatch);
