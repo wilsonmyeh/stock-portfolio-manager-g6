@@ -24,8 +24,6 @@
 			// using ajax get JSON
 			$.getJSON("checkColumns.php",
 				function(data) {
-					console.log(data);
-					console.log(data.length);
 					for(var i = 0; i < data.length; ++i)
 					{ // data[i] is the stock ticker that needs to be added
 						// we need to add a new column for each ticker
@@ -41,8 +39,8 @@
 			// ask the server for the rows in the form of the historical data
 			$.getJSON("checkRows.php",
 					function(data) {
-						console.log(data);
 						console.log(data.length);
+						console.log(data);
 						for(var i = 0; i < data.length; ++i)
 						{
 							var row = new Array();
@@ -114,13 +112,12 @@
 		// function to add a stock to the graph
 		function addStock() {
 			var tickerText = document.getElementById('ticker_text').value;
-			
 			$.ajax({
 				method : "POST",
 				url: "addStock.php",
 				data: { ticker : tickerText },
 				success: function(data) {
-					alert("Adding " + data + " to graph.");
+					alert("Added " + data + " to graph.");
 					setTimeout(drawChart, 1000);
 				}
 			});
