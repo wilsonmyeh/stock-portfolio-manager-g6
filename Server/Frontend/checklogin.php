@@ -85,6 +85,7 @@
 		   	        $portfolioObj->createOwnedStocks($stockNamesArray,$stockArray);
 		   	        $portfolioObj->createWatchedStocks($stockListName,$trackedStockArray);
 		   	        $portfolioObj->setBankBalance($bankBalance);
+		   	        $portfolioObj->updatePortfolioValue();
 
 
 		   	        //Create account information

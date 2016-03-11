@@ -12,6 +12,7 @@
   include_once('../Stock.class.php');
   include_once('../TrackedStock.class.php');
   include_once('../OwnedStock.class.php');
+  include_once('YahooFinance.php');
 
   session_start();
 
@@ -33,6 +34,31 @@
       for ($x = 0; $x < count($tickerArray); $x++) {
         $this->ownedStock[$tickerArray[$x]] = $ownedStockArray[$x];
       }   
+    }
+
+    public function updatePortfolioValue(){
+      $newValue = 0;
+      
+      //get the current value of the portfolio Yahoo
+      $objYahooStock = new YahooStock;
+      $objYahooStock->addFormat("snl1d1"); 
+
+      $stocks = array_keys($this->ownedStock);
+      $stockObjects = $this->ownedStock;
+    
+      foreach($stocks as $code=>$stock){
+        $objYahooStock->addStock((string)$stock);
+      }
+
+      foreach( $objYahooStock->getQuotes() as $code => $stock){
+        $stockNumShares = $stockObjects[ $stock[0] ] -> getNumberOwned();
+        $stockPrice = $stock[2];
+        $pairValue = $stockNumShares * $stockPrice;
+        $newValue = $newValue + $pairValue;
+      }
+
+      $this->totalValue = $newValue;
+
     }
 
     public function addOwnedStock($tickerSymbol, $newStock){
@@ -64,12 +90,20 @@
       return $this->trackedStock;
     }
 
+    public function getTotalValue(){
+      return $this->totalValue;
+    }
+
     public function setUsername($username){
      $this->username = $username;
    }
 
    public function getUsername(){
      return $this->username;
+   }
+
+   public function removeWatchedStock($tickerName){
+      unset($this->trackedStock[$tickerName]);
    }
 
    public function setBankBalance($bankBalance){
@@ -164,6 +198,9 @@
                   //update local object balance
                   $this->bankBalance = $newBalance;
 
+                  //update the total value of the portfolio
+                  $this->updatePortfolioValue();
+
                   $successfulOrder = "Transaction successful!";
                   echo "<script type='text/javascript'>alert('$successfulOrder');</script>";
 
@@ -227,28 +264,21 @@
                 }
 
                 //remove it from purhcaseDates
-                // if (($dateKey = array_search($stockTicker, $stockPurchaseDates)) !== false) {
                   unset($stockPurchaseDates[$stockTicker]);
                   $portfolio->setAssociativeArray("purchaseDates", $stockPurchaseDates);    
-                // }
 
-                // remove it from purchasePrices
-                // if (($priceKey = array_search($stockTicker, $stockPurchasePrices)) !== false) {
+
+                // remove it from purchasePrices   
                   unset($stockPurchasePrices[$stockTicker]);
                   $portfolio->setAssociativeArray("purchasePrices", $stockPurchasePrices);    
-                // }
+
 
                 //remove it from numberShares
-                // if (($shareKey = array_search($stockTicker, $stockNumberShares)) !== false) {
                   unset($stockNumberShares[$stockTicker]);
                   $portfolio->setAssociativeArray("numberShares", $stockNumberShares);    
-                // }
-
 
                 //remove it from local list of owned stocks
-                // if (($dateKey = array_search($stockTicker, $this->ownedStock)) !== false) {
-                  unset($this->ownedStock[$stockTicker]);
-                // }     
+                  unset($this->ownedStock[$stockTicker]);   
             }
 
             else{ //else, they still own at least 1 share of that stock 
@@ -284,12 +314,16 @@
 
               $portfolio->set("accountBalance", $newBalance);
 
+
               $successfulOrder = "Transaction successful!";
               echo "<script type='text/javascript'>alert('$successfulOrder');</script>";
 
 
               //update local object balance
               $this->bankBalance = $newBalance;
+
+              //update the total value of the portfolio
+              $this->updatePortfolioValue();
 
             try{ //save this update to parse
               $portfolio->save();
