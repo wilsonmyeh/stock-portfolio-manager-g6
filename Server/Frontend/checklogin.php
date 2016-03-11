@@ -1,4 +1,4 @@
-<body>
+
 	 <?php 
 	 	//Enable global variables
 	 	session_start();
@@ -126,4 +126,3 @@
 	 	}
 	 	
 	 ?> 
-</body>

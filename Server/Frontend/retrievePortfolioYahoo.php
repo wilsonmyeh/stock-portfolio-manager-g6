@@ -1,4 +1,3 @@
-<html>
 <body>
 	<?php
 		// //enable global variables
@@ -53,6 +52,4 @@
 	
 	pullPortfolioDataFromYahoo();
 
-	?>
-</body>
-</html>
+?>
