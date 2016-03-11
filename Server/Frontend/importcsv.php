@@ -137,7 +137,7 @@
 
 	function createNewPortfolioInParse($stockTickerNames, $stockTickerShares, $stockTickerDates, $stockTickerPrices){
 		$queryPortfolio = new ParseQuery("Portfolio");
-		$queryPortfolio->equalTo("username", (string)$_SESSION['account']->getUsername());
+		$queryPortfolio->equalTo("username", $_SESSION['account']->getUsername());
 		try {
 			 	$newPortfolio = $queryPortfolio->first();
 				$newPortfolio->setArray("stockNames", $stockTickerNames);

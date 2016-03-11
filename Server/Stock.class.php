@@ -7,11 +7,11 @@ abstract class Stock
 	private $companyName;
 	private $initialDate;
 	
-	
+	public $historicalData = array();
 	
 	public function addHistoricalData($price, $date)
 	{
-		$this->historicalData[] = array("price"=>$price, "date"=>$date);
+		$this->historicalData[$date] = array("price"=>$price, "date"=>$date);
 	}
 	
 	public function outputData()
@@ -20,7 +20,7 @@ abstract class Stock
 	}
 
 	public function getTicker(){
-		return (string)$this->ticker;
+		return $this->ticker;
 	}
 
 	public function setTicker($ticker){
