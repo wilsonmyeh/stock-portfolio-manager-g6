@@ -1,4 +1,7 @@
 <?php
+	//Enable global variables
+	session_start();
+
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
@@ -8,9 +11,6 @@
 	include_once('../Stock.class.php');
 	include_once('../TrackedStock.class.php');
 	include_once('../OwnedStock.class.php');
-
-	 //Enable global variables
-	 session_start();
 
 	require '../../vendor/autoload.php';
 	use Parse\ParseClient;
@@ -132,7 +132,7 @@
 
 	function createNewPortfolioInParse($stockTickerNames, $stockTickerShares, $stockTickerDates, $stockTickerPrices){
 		$queryPortfolio = new ParseQuery("Portfolio");
-		$queryPortfolio->equalTo("username", $_SESSION['account']->getUsername());
+		$queryPortfolio->equalTo("username", (string)$_SESSION['account']->getUsername());
 		try {
 			 	$newPortfolio = $queryPortfolio->first();
 				$newPortfolio->setArray("stockNames", $stockTickerNames);

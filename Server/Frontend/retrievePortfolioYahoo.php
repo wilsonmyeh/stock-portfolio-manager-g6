@@ -24,12 +24,13 @@
 		ParseClient::initialize('YtTIOIVkgKimi9f3KgvmhAm9be09KaFPD0lK1r21', 'Bxf6gl3FUT0goWvvx3DIger9bcOjwY1LflXr6MIO', 'r86cSKPWagMCavzJXVF4OFnte5yPpNY74GhY9UxS');
 
 
+		pullPortfolioDataFromYahoo();
 	function pullPortfolioDataFromYahoo(){
 		$objYahooStock = new YahooStock;
 		$objYahooStock->addFormat("snl1d1c1p2"); 
 
-
-		$stocks = array_keys(_SESSION["account"] -> getPortfolio() -> getOwnedStock());
+		$stocks = array_keys(_SESSION['account'] -> getPortfolio() -> getOwnedStock());
+		$stockObjects = _SESSION['account'] -> getPortfolio() ->getOwnedStock();
 		
 		foreach($stocks as $code=>$stock){
 			$objYahooStock->addStock((string)$stock);
@@ -39,7 +40,7 @@
 	      ?>
 	      Ticker: <?php echo $stock[0]; ?> <br />
 	      Company Name: <?php echo $stock[1]; ?> <br />
-	      Quantity: <?php echo $_SESSION['account'] -> getPortfolio() -> getOwnedStock()[(string)$stock[0]] -> getNumberOwned(); ?> <br />
+	      Quantity: <?php echo $stockObjects[(string)$[stock[0]]]-> getNumberOwned(); ?> <br />
 	      Last Trade Price: <?php echo'$ '.$stock[2]; ?> <br />
 	      Last Trade Date: <?php echo $stock[3]; ?> <br />
 	      Dollar Change: <?php echo '$ '. $stock[4]; ?> <br />

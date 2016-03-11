@@ -2,6 +2,9 @@
 <body>
 	 <?php 
 
+	 	//Enable global variables
+	 	session_start();
+
 		//Allow for errors to be displayed
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
@@ -12,10 +15,6 @@
 		include_once('../Stock.class.php');
 		include_once('../TrackedStock.class.php');
 		include_once('../OwnedStock.class.php');
-
-	 	//Enable global variables
-	 	session_start();
-
 	 	
 	
 		//Initialize parse and the classes it needs
