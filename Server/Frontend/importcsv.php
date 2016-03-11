@@ -22,9 +22,11 @@
 		readfile("http://localhost/Frontend/dashboard.html");
 		//modified code from http://www.w3schools.com/php/php_file_upload.asp
 		$target_dir = "";
-		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+		$target_file = $target_dir . "temp.csv";
 		$uploadOk = 1;
-		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+		$imageFileType = pathinfo(basename($_FILES["fileToUpload"]["name"]),PATHINFO_EXTENSION);
+
+		/*
 		// Check if file already exists
 		if (file_exists($target_file)) {
 			//echo "Sorry, file already exists.";
@@ -32,6 +34,8 @@
 			echo "<script type='text/javascript'>alert('$message');</script>";
 			$uploadOk = 0;
 		}
+		*/
+
 		// Check file size
 		if ($_FILES["fileToUpload"]["size"] > 500000) {
 			//echo "Sorry, your file is too large.";
@@ -56,9 +60,10 @@
 				//echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
 				$message =  "Portfolio imported sucessfully!";
 				echo "<script type='text/javascript'>alert('$message');</script>";
-				parseCSVToArrays(basename($_FILES["fileToUpload"]["name"]));
+				parseCSVToArrays($target_file);
 			} else {
-				//echo "Sorry, there was an error uploading your file.";
+				$message = "Sorry, there was an error uploading your file.";
+				echo "<script type='text/javascript'>alert('$message');</script>";
 			}
 		}
 		
