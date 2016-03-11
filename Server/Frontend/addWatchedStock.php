@@ -25,8 +25,6 @@
 	//this function adds the stock to the user's watch list
 	function watchStock($tickerName){
 
-		readfile("http://localhost/Frontend/dashboard.html"); //makes it so that any alerts or echos stay on the dashboard
-
 		//get the user's portfolio from Parse
 		$queryWatchlist = new ParseQuery("Watchlist");
 
@@ -44,6 +42,7 @@
 		  		}
 		  	else{ //need to add it to the watchlist
 		  		array_push($stockNames, $tickerName);
+		  		sort($stockNames);
 
 		  		//update the local watchlist stock list
 		  		$trackedStock = new TrackedStock();

@@ -1,6 +1,4 @@
 <?php
-	//Enable global variables
-	session_start();
 
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
@@ -11,6 +9,9 @@
 	include_once('../Stock.class.php');
 	include_once('../TrackedStock.class.php');
 	include_once('../OwnedStock.class.php');
+
+	//Enable global variables
+	session_start();
 
 	require '../../vendor/autoload.php';
 	use Parse\ParseClient;
@@ -177,9 +178,9 @@
 
 		   	    array_push($stockArray,$ownedStock);
 		   }
-		   	$globalAccount->getPortfolio()->createOwnedStocks($stockTickerNames,$stockArray);
+		   $globalAccount->getPortfolio()->createOwnedStocks($stockTickerNames,$stockArray);
 
-		 $_SESSION['account'] =  $globalAccount;
+		 $_SESSION['account'] = $globalAccount;
 
 
 	}
