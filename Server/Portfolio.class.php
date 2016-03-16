@@ -7,12 +7,12 @@
   use Parse\ParseQuery;
   ParseClient::initialize('YtTIOIVkgKimi9f3KgvmhAm9be09KaFPD0lK1r21', 'Bxf6gl3FUT0goWvvx3DIger9bcOjwY1LflXr6MIO', 'r86cSKPWagMCavzJXVF4OFnte5yPpNY74GhY9UxS');
 
-  include_once('../Portfolio.class.php');
-  include_once('../Account.class.php');
-  include_once('../Stock.class.php');
-  include_once('../TrackedStock.class.php');
-  include_once('../OwnedStock.class.php');
-  include_once('YahooFinance.php');
+  // include_once('../Portfolio.class.php');
+  include_once('Account.class.php');
+  include_once('Stock.class.php');
+  include_once('TrackedStock.class.php');
+  include_once('OwnedStock.class.php');
+  include_once('Frontend/YahooFinance.php');
 
   session_start();
 
