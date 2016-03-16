@@ -116,6 +116,20 @@
   }
 
   public function buyStock($stockTicker, $numShares, $purchasePrice){
+    //check if they try to buy a stock that doesn't exist
+
+      //try to query from Yahoo
+      $objYahoo = new YahooStock;
+      $objYahoo->addFormat("snl1d1t1"); 
+      $objYahoo->addStock($stockTicker);
+
+      foreach( $objYahoo->getQuotes() as $code => $stock){
+        if((string)$stock[1] == "N/A"){ //doesn't exist'
+          $fakeOrder = "Stock does not exist. Transaction failed.";
+          echo "<script type='text/javascript'>alert('$fakeOrder');</script>";
+          return;
+        }
+      }
 
               //retrieve the portfolio from parse
       $queryStock = new ParseQuery("Portfolio");
@@ -130,7 +144,7 @@
                 $stockNumberShares = $portfolio->get("numberShares");
                 $accountBalance = $portfolio->get("accountBalance");
 
-                          //if they try to purchase more stocks than they have the money for
+                //if they try to purchase more stocks than they have the money for
                 if($accountBalance < ($numShares * $purchasePrice)){
                   $failedOrder = "Insufficient funds. Transaction failed.";
                   echo "<script type='text/javascript'>alert('$failedOrder');</script>";
@@ -146,7 +160,7 @@
                 }
 
                 if($found == true){
-                            //if they already own it, just need to update the numbers of shares they own of this stock
+                  //if they already own it, just need to update the numbers of shares they own of this stock
                   $prevNumber = $stockNumberShares[$stockTicker];
                   $stockNumberShares[$stockTicker] = $prevNumber + $numShares;
                   ksort($stockNumberShares);
@@ -181,14 +195,14 @@
                   $portfolio->setAssociativeArray("numberShares", $stockNumberShares);
 
                   //update local ownedStockList with the new stock object
-                  $ownedStock = new OwnedStock();
-                  $ownedStock->setTicker($stockTicker);
-                  $ownedStock->setInitialDate((string)date("Y/m/d"));
-                  $ownedStock->setInitialPurchasePrice($purchasePrice);
-                  $ownedStock->setNumberOwned($numShares);
+                  $ownedStock2 = new OwnedStock();
+                  $ownedStock2->setTicker($stockTicker);
+                  $ownedStock2->setInitialDate((string)date("Y/m/d"));
+                  $ownedStock2->setInitialPurchasePrice($purchasePrice);
+                  $ownedStock2->setNumberOwned($numShares);
 
-                  $this->ownedStock[$stockTicker] = $ownedStock;
-                  ksort($ownedStock);
+                  $this->ownedStock[$stockTicker] = $ownedStock2;
+                  ksort($this->ownedStock);
                 }
 
                   //update account balance
@@ -230,6 +244,20 @@
         $stockPurchasePrices = $portfolio->get("purchasePrices");
         $stockNumberShares = $portfolio->get("numberShares");
         $accountBalance = $portfolio->get("accountBalance");
+
+        //try to query from Yahoo to see if stock exists
+        $objYahoo = new YahooStock;
+        $objYahoo->addFormat("snl1d1t1"); 
+        $objYahoo->addStock($stockTicker);
+
+        foreach( $objYahoo->getQuotes() as $code => $stock){
+          if((string)$stock[1] == "N/A"){ //doesn't exist'
+            $fakeOrder = "Stock does not exist. Transaction failed.";
+            echo "<script type='text/javascript'>alert('$fakeOrder');</script>";
+            return;
+          }
+        }
+
 
         $found = false;
 
