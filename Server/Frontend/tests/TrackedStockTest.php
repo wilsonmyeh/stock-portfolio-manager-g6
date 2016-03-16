@@ -1,5 +1,5 @@
 <?php
-	require 'Server/TrackedStock.class.php';
+	require_once( '../TrackedStock.class.php');
 
 	class TrackedStockTest extends PHPUnit_Framework_TestCase
 	{

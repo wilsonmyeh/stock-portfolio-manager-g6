@@ -1,7 +1,7 @@
 <body>  
   <?php
 
-  require '../../vendor/autoload.php';
+  require( '../../vendor/autoload.php');
   use Parse\ParseClient;
   use Parse\ParseException;
   use Parse\ParseQuery;

@@ -8,19 +8,20 @@ Create a portfolio object with test arrays, pass in a previously not owned stock
 Test: buyStock() --Rebecca
 Create a portfolio object with t
 
-*/	
-	require 'vendor/autoload.php';
+*/
+
+	require_once('../../vendor/autoload.php');
 	use Parse\ParseClient;
 	use Parse\ParseException;
 	use Parse\ParseQuery;
 	ParseClient::initialize('YtTIOIVkgKimi9f3KgvmhAm9be09KaFPD0lK1r21', 'Bxf6gl3FUT0goWvvx3DIger9bcOjwY1LflXr6MIO', 'r86cSKPWagMCavzJXVF4OFnte5yPpNY74GhY9UxS');
 
-	include_once('Server/Portfolio.class.php');
-	include_once('Server/Account.class.php');
-	include_once('Server/Stock.class.php');
-	include_once('Server/TrackedStock.class.php');
-	include_once('Server/OwnedStock.class.php');
-	require 'Server/Frontend/YahooFinance.php';
+	include_once('../Portfolio.class.php');
+	include_once('../Account.class.php');
+	include_once('../Stock.class.php');
+	include_once('../TrackedStock.class.php');
+	include_once('../OwnedStock.class.php');
+	include_once 'YahooFinance.php';
 
 
 	class BuyingStockTest extends PHPUnit_Framework_TestCase
@@ -88,8 +89,9 @@ Create a portfolio object with t
 		    $purchasePrice = (double) 25.0;
 
 		    //get the ticker of the first stock they own
-		    reset($portfolioObj->getOwnedStock());
-			$stockTicker = key($portfolioObj->getOwnedStock());
+		    $array = $portfolioObj->getOwnedStock();
+		    reset($array);
+			$stockTicker = key($array);
 
 			//get previous stock object associated with stockTicker before buying stock
 			$tempStockArray = $portfolioObj->getOwnedStock();
