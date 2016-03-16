@@ -313,7 +313,7 @@
             else{ //else, they still own at least 1 share of that stock 
 
                 $prevNumberOwned = $stockNumberShares[$stockTicker]; //update the number of shares they own now
-                $stockNumberShares[$stockTicker]=$prevNumberOwned - $numShares; //add in number of shares
+                $stockNumberShares[$stockTicker]= $prevNumberOwned - $numShares; //add in number of shares
                 ksort($stockNumberShares);
 
                 //update values for Parse object
@@ -321,7 +321,6 @@
 
 
                 //update local ownedStock quantity
-                $prevNumberOwned = $this->ownedStock[$stockTicker] -> getNumberOwned();
                 $newNumberOwned = $prevNumberOwned - $numShares;
                 $this->ownedStock[$stockTicker] -> setNumberOwned($newNumberOwned);
 

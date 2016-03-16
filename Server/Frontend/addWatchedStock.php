@@ -25,6 +25,19 @@
 	//this function adds the stock to the user's watch list
 	function watchStock($tickerName){
 
+		 //try to query from Yahoo to see if stock exists
+        $objYahoo = new YahooStock;
+        $objYahoo->addFormat("snl1d1t1"); 
+        $objYahoo->addStock($tickerName);
+
+		foreach( $objYahoo->getQuotes() as $code => $stock){
+          if((string)$stock[1] == "N/A"){ //doesn't exist'
+            $fakeOrder = "This stock does not exist.";
+            echo "<script type='text/javascript'>alert('$fakeOrder');</script>";
+            return;
+          }
+        }
+
 		//get the user's portfolio from Parse
 		$queryWatchlist = new ParseQuery("Watchlist");
 

@@ -16,6 +16,17 @@
 
 	class OwnedStockAddingAndGettingTest extends PHPUnit_Framework_TestCase
 	{
+		// public function testAddingAlreadyTrackedStockShouldResultInUnchangedWatchlist(){
+		// 	asdjfkjasdf;
+		// }
+
+		// public function testAddingTrackedStockThatDoesNotExistShouldResultInUnchangedWatchlist(){
+		// 	asdfasdfasdf;
+		// }
+
+		// public function testAddingValidStockNotAlreadyTrackedShouldResultInNewStockAddedToWatchlist(){
+		// 	adsfjasfdasdf;
+		// }
 		//test that owned stock getter works
 		public function testThatGetOwnedStockReturnsCorrectlySavedOwnedStocksInAPortfolio(){
 			$portfolioObj = new Portfolio();
