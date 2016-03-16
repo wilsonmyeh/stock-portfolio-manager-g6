@@ -14,10 +14,10 @@
 	include_once 'YahooFinance.php';
 
 
-	class OwnedStockAddingAndGettingTest extends PHPUnit_Framework_TestCase
+	class TrackedStockAddingAndGettingTest extends PHPUnit_Framework_TestCase
 	{
-		//test that owned stock getter works
-		public function testThatGetOwnedStockReturnsCorrectlySavedOwnedStocksInAPortfolio(){
+		//test that getter for tracked stocks work
+		public function testThatGetTrackedStockReturnsCorrectlySavedTrackedStocksInAPortfolio(){
 			$portfolioObj = new Portfolio();
 			$portfolioObj->setUsername("rebecca@usc.edu");
 			$portfolioObj->setBankBalance(10000);
@@ -73,17 +73,17 @@
 		    $portfolioObj->updatePortfolioValue(); 
 
 		    //now test that the ownedStocks are saved and can be returned properly
-		    $ownedStockObjects = $portfolioObj->getOwnedStock();
+		    $trackedStockObjects = $portfolioObj->getTrackedStock();
 
-		    $this->assertArrayHasKey("MSFT", $ownedStockObjects, "owned stock array mistakenly does not have correct stock objects after setting the portfolio");
-		    $this->assertArrayHasKey("GOOG", $ownedStockObjects, "owned stock array mistakenly does not have correct stock objects after setting the portfolio");
-		    $this->assertArrayHasKey("AAPL", $ownedStockObjects, "owned stock array mistakenly does not have correct stock objects after setting the portfolio");
-		    $this->assertEquals(count($ownedStocks), count($ownedStockObjects), "owned stock objects list and test stock objects list are not the same size after the getter");
+		    $this->assertArrayHasKey("CMG", $trackedStockObjects, "tracked stock array mistakenly does not have correct stock objects after setting the portfolio");
+		    $this->assertArrayHasKey("AMZN", $trackedStockObjects, "tracked stock array mistakenly does not have correct stock objects after setting the portfolio");
+		    $this->assertArrayHasKey("COST", $trackedStockObjects, "tracked stock array mistakenly does not have correct stock objects after setting the portfolio");
+		    $this->assertEquals(count($trackedStocks), count($trackedStockObjects), "tracked stock objects list and test stock objects list are not the same size after the getter");
         }
 
 		  
-		//test that individual stock object can be saved in the owned list
-		public function testIndividualOwnedStockCanBeAddedToOwnedStockListInPortfolioObject(){
+		//test that individual stock object can be added to tracked list
+		public function testIndividualTrackedStockCanBeAddedToTrackedStockListInPortfolioObject(){
 			//Arrange
 			//creating a variable for this test
 			$portfolioObj = new Portfolio();
@@ -135,23 +135,16 @@
 		        $portfolioObj->updatePortfolioValue();
 
 
-
-		     //make a new ownedStock object to add to the portfolio object
-		    $ownedStock = new OwnedStock();
-        	$ownedStock->setTicker("MSFT");
-        	$ownedStock->setInitialDate((string)date("Y/m/d")); 
-        	$initialPrice = (double)72.8;
-        	$ownedStock->setInitialPurchasePrice($initialPrice);
-        	$numberOwned = (int) 7;
-        	$ownedStock->setNumberOwned($numberOwned);
-
+		     //make a new trackedStock object to add to the portfolio object
+		    $trackedStock = new TrackedStock();
+        	$trackedStock->setTicker("AMZN");
+        	
 			//Assert
-			$this->assertArrayNotHasKey("MSFT", $portfolioObj->getOwnedStock(), "owned stock array mistakenly already has new stock object before inserting it");
+			$this->assertArrayNotHasKey("AMZN", $portfolioObj->getTrackedStock(), "tracked stock array mistakenly already has new stock object before inserting it");
 
-			$portfolioObj->addOwnedStock("MSFT", $ownedStock);
+			$portfolioObj->addTrackedStock("AMZN", $trackedStock);
 
-			$this->assertArrayHasKey("MSFT", $portfolioObj->getOwnedStock(), "owned stock array mistakenly does not have new stock object after inserting it");
-
+			$this->assertArrayHasKey("AMZN", $portfolioObj->getTrackedStock(), "tracked stock array mistakenly does not have new stock object after inserting it");
 		    }
 
 		    catch (ParseException $ex) {
