@@ -76,8 +76,8 @@
 					$accountObj->setUsername("rebecca@usc.edu");
 		   	       	$_SESSION['account'] =  $accountObj;
 
-		   	       //get the ticker of the first stock they own
-		    		$array = $portfolioObj->getOwnedStock();
+		   	       //get the ticker of the first stock they watch
+		    		$array = $portfolioObj->getTrackedStock();
 		    		reset($array);
 					$stockTicker = key($array);
 
@@ -91,7 +91,7 @@
 
 		   	       	$postCount = count($portfolioObj->getTrackedStock());
 
-		   	       	$this->assertArrayHasKey($stockTicker, $portfolioObj->get, "tracked stock array mistakenly does not have stock ticker after re-adding it to the watchlist");
+		   	       	$this->assertArrayHasKey($stockTicker, $portfolioObj->getTrackedStock(), "tracked stock array mistakenly does not have stock ticker after re-adding it to the watchlist");
 
 		   	       	$this->assertEquals($prevCount, $postCount, "pre and post size of tracked stock array are not the same after re-adding a track stock to the watchlist");
 

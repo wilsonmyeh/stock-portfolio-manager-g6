@@ -143,7 +143,7 @@
 		        $portfolioObj->updatePortfolioValue();
 
 		        //now try to buy 
-		        $numShares = (int) 33; //test values for number of shares and purchase price to buy
+		        $numShares = (int) 330; //test values for number of shares and purchase price to buy
 		    	$purchasePrice = (double) 30000.60; //ridiculously large value
 		    	$stockTicker = "GOOG"; //can be either a stock they own or do not own
 

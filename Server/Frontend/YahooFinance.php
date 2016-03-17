@@ -53,9 +53,10 @@ class YahooStock{
      * @return array
      */
     public function getQuotes()
-    {        
+    { 
+
         $result = array();    
-    $format = $this->format;
+        $format = $this->format;
         
         foreach ($this->stocks as $stock)
         {            
