@@ -1,5 +1,6 @@
 <?php
 	//enable global variables
+	// session_start();
 
 	include_once('../Portfolio.class.php');
 	include_once('../Account.class.php');
@@ -34,6 +35,7 @@
           if((string)$stock[1] == "N/A"){ //doesn't exist'
             $fakeOrder = "This stock does not exist.";
             echo "<script type='text/javascript'>alert('$fakeOrder');</script>";
+            readfile("http://localhost/Frontend/dashboard.html"); //makes it so that any alerts or echos stay on the dashboard
             return;
           }
         }
@@ -51,6 +53,7 @@
 			  	if (($tickerKey = array_search($tickerName, $stockNames)) !== false) { //if they are already tracking the stock, don't add it
 	       			$duplicateTrack = "Already tracking this stock.";
 		  			echo "<script type='text/javascript'>alert('$duplicateTrack');</script>";
+		  			readfile("http://localhost/Frontend/dashboard.html"); //makes it so that any alerts or echos stay on the dashboard
 		  			return;
 		  		}
 		  	else{ //need to add it to the watchlist

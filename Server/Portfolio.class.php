@@ -218,6 +218,7 @@
 
                   $successfulOrder = "Transaction successful!";
                   echo "<script type='text/javascript'>alert('$successfulOrder');</script>";
+                  readfile("http://localhost/Frontend/dashboard.html"); //makes it so that any alerts or echos stay on the dashboard
 
                 try{ //save this update to parse
                   $portfolio->save();
