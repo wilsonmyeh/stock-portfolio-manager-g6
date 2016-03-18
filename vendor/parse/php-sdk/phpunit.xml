@@ -18,7 +18,7 @@
         >
     <testsuites>
         <testsuite>
-            <directory suffix="Test.php">./Server/Frontend/tests</directory>
+           <directory suffix="Test.php">./Server/Frontend/tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>
