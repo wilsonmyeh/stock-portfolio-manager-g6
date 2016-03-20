@@ -58,3 +58,14 @@ Last Trade (Price Only): 118.055
 Code: NFLX
 Last Trade (Price Only): 98.09
 
+03/18/16 13:01:02
+Retrieved 5 portfolios
+Querying 7 stocks
+AAPL
+CMG
+COST
+EBAY
+GLD
+NFLX
+GOOG
+Retrieved 1 stock objects
