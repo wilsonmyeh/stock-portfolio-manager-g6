@@ -1,4 +1,5 @@
 <?php
+	include_once('Stock.class.php');
 		class OwnedStock extends Stock{
 			private $initialPurchasePrice;
 			private $numberOwned;
