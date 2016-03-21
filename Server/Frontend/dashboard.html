@@ -48,15 +48,15 @@ JQuery Plugin for idle timeout
 
 				if(hour == 9 && min < 30){
 					document.getElementById('marketstatus').innerHTML = "The stock market is closed"
-					disableBuySell(true);
+					//disableBuySell(true);
 				}
 				else if (hour <= 9){
 					document.getElementById('marketstatus').innerHTML = "The stock market is closed"
-					disableBuySell(true);
+					//disableBuySell(true);
 				}
 				else if (hour >= 16){
 					document.getElementById('marketstatus').innerHTML = "The stock market is closed"
-					disableBuySell(true);
+					//disableBuySell(true);
 				}
 
 				var t = setTimeout(startTime, 500);
