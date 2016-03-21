@@ -96,3 +96,39 @@ Last Trade (Price Only): 737.60
 Code: NFLX
 Last Trade (Price Only): 101.12
 
+03/21/16 13:01:01
+Retrieved 5 portfolios
+Querying 10 stocks
+AAPL
+CMG
+COST
+EBAY
+GLD
+GOOG
+NFLX
+AMZN
+YHOO
+AMBA
+Retrieved 7 stock objects
+Successfully destroyed stock objects
+Code: AAPL
+Last Trade (Price Only): 106.61
+Code: CMG
+Last Trade (Price Only): 454.97
+Code: COST
+Last Trade (Price Only): 153.80
+Code: EBAY
+Last Trade (Price Only): 24.20
+Code: GLD
+Last Trade (Price Only): 119.12
+Code: GOOG
+Last Trade (Price Only): 739.03
+Code: NFLX
+Last Trade (Price Only): 99.98
+Code: AMZN
+Last Trade (Price Only): 545.585
+Code: YHOO
+Last Trade (Price Only): 35.24
+Code: AMBA
+Last Trade (Price Only): 39.20
+
