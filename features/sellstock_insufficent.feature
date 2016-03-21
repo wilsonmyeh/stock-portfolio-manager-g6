@@ -1,6 +1,6 @@
 Feature:Unsuccessful selling insufficient quantity
 	When the user logs in and inputs a valid stock to sell but has too little quantity should output error message
-Scenario:Nonexistent Buy Stock
+Scenario:Insufficient Sell Stock
 	Given user navigates to http://localhost/Frontend/login.html
 	And fills Username as "halfond@usc.edu"
 	And fills Password as "HelloWorld1!"
