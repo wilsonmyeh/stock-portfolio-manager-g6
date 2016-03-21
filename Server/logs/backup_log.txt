@@ -69,3 +69,30 @@ GLD
 NFLX
 GOOG
 Retrieved 1 stock objects
+03/21/16 13:01:01
+Retrieved 5 portfolios
+Querying 7 stocks
+AAPL
+CMG
+COST
+EBAY
+GLD
+GOOG
+NFLX
+Retrieved 7 stock objects
+Successfully destroyed stock objects
+Code: AAPL
+Last Trade (Price Only): 105.92
+Code: CMG
+Last Trade (Price Only): 455.37
+Code: COST
+Last Trade (Price Only): 153.15
+Code: EBAY
+Last Trade (Price Only): 23.77
+Code: GLD
+Last Trade (Price Only): 119.80
+Code: GOOG
+Last Trade (Price Only): 737.60
+Code: NFLX
+Last Trade (Price Only): 101.12
+
