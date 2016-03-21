@@ -1,12 +1,14 @@
 <?php
+include_once "../Stock.class.php";
+include_once "../Graph.class.php";
+include_once "../TrackedStock.class.php";
+include_once "../OwnedStock.class.php";
+include_once "../Account.class.php";
+include_once "../Portfolio.class.php";
 session_start();
-include_once "Stock.class.php";
-include_once "Graph.class.php";
-include_once "TrackedStock.class.php";
-include_once "OwnedStock.class.php";
 
 $_SESSION["graph"] = new Graph();
-$_SESSION["apple"] = new TrackedStock;
+/*$_SESSION["apple"] = new TrackedStock;
 $_SESSION["apple"]->setTicker("AAPL");
 $_SESSION["apple"]->setInitialDate(date_create('2016-02-01'));
 $_SESSION["goog"] = new TrackedStock;
@@ -22,6 +24,10 @@ $_SESSION["facebook"]->setInitialDate(date_create('2016-02-01'));
 $_SESSION["graph"]->pullHistoricalData($_SESSION["apple"]);
 $_SESSION["graph"]->pullHistoricalData($_SESSION["goog"]);
 $_SESSION["graph"]->pullHistoricalData($_SESSION["microsoft"]);
-$_SESSION["graph"]->pullHistoricalData($_SESSION["facebook"]);
-print_r($_SESSION["graph"]);
+$_SESSION["graph"]->pullHistoricalData($_SESSION["facebook"]);*/
+foreach($_SESSION["account"]->getPortfolio()->getOwnedStock() as $stock)
+{
+	print_r($stock);
+	$_SESSION["graph"]->pullHistoricalData($stock);
+}
 ?>

@@ -1,5 +1,4 @@
-<body>	
-	<?php
+<?php
 		class Account{
 			public $username;
 			public $portfolio;
@@ -27,4 +26,3 @@
 
 		}
 	?>
-</body>

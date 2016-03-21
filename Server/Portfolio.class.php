@@ -1,5 +1,4 @@
-<body>  
-  <?php
+<?php
 
   require( '../../vendor/autoload.php');
   use Parse\ParseClient;
@@ -373,5 +372,3 @@
     }
   }
   ?>
-
-  </body>
