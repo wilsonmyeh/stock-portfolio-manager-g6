@@ -15,12 +15,19 @@ Given(/^fills Reset as "([^"]*)"$/) do |email|
 end
 
 
-Given(/ resets password$/) do
-	click_button('reset')
+Given(/^resets password$/) do
+	click_button('Submit')
 	text = page.driver.browser.switch_to.alert.text # Should be Successful log in! popup
-	expect(text).to eq 'Successful Reset!' # RSpec to check string
+	expect(text).to eq 'Password reset successful. Please check your email.' # RSpec to check string
 	page.driver.browser.switch_to.alert.accept # Click through the popup
 	page.should have_content('Welcome to Stock Portfolio Manager')
+end
+
+Given(/^resets password unsuccessfully$/) do
+	click_button('Submit')
+	text = page.driver.browser.switch_to.alert.text # Should be Successful log in! popup
+	expect(text).to eq 'no user found with email invalidemail@usc.edu' # RSpec to check string
+	page.driver.browser.switch_to.alert.accept # Click through the popup
 end
 
 Given(/^logs out$/) do
