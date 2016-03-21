@@ -47,3 +47,9 @@ Given(/^sells insufficient quantity stock$/) do
 	expect(text).to eq 'You do not own enough shares. Transaction failed.' # RSpec to check string
 	page.driver.browser.switch_to.alert.accept # Click through the popup
 end
+Given(/^sells stock$/) do
+	click_button('Sell')
+	text = page.driver.browser.switch_to.alert.text # Should be Successful log in! popup
+	expect(text).to eq 'Transaction successful!' # RSpec to check string
+	page.driver.browser.switch_to.alert.accept # Click through the popup
+end
