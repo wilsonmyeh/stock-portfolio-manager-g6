@@ -86,7 +86,7 @@
 					explorer: {},
 					trendlines: null,
 					width: 675,
-					height: 275
+					height: 250
 				};
 	
 				// the chart object itself
