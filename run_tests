@@ -1,0 +1,4 @@
+#!/bin/bash
+cucumber --order random
+cd ~/stock-portfolio-manager-g6/Server/Frontend
+phpunit --debug tests
