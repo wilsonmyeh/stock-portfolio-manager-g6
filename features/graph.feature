@@ -44,3 +44,22 @@ Scenario: Zoom
 		And waits for 10 seconds
 		When user scrolls up while hovering over graph
 		Then graph should zoom
+
+Scenario: Clicked On Stock In Graph
+		Given user navigates to http://localhost/Frontend/login.html
+		And fills Username as "halfond@usc.edu"
+		And fills Password as "HelloWorld1!"
+		And logs in
+		And waits for 10 seconds
+		When user clicks on a stock in graph
+		Then detailed information widget should populate
+
+Scenario: Add Stock To Graph Using Text Field And Button
+		Given user navigates to http://localhost/Frontend/login.html
+		And fills Username as "halfond@usc.edu"
+		And fills Password as "HelloWorld1!"
+		And logs in
+		And waits for 10 seconds
+		And fills Add Stock Ticker as "FB"
+		When user clicks Graph Stock
+		Then graph should add stock

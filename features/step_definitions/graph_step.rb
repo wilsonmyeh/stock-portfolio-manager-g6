@@ -3,6 +3,10 @@ Given(/^waits for (\d+) seconds$/) do |seconds|
 	sleep(sleep_time_seconds);
 end
 
+Given(/^fills Add Stock Ticker as "([^"]*)"$/) do |ticker|
+	fill_in('ticker_text', :with => ticker)
+end
+
 When(/^user waits for (\d+) seconds$/) do |seconds|
 	sleep_time_seconds = seconds.to_i;
 	sleep(sleep_time_seconds);
@@ -23,6 +27,14 @@ When(/^user scrolls up while hovering over graph$/) do
 	page.execute_script "window.scrollBy(0, 10)";
 end
 
+When(/^user clicks on a stock in graph$/) do
+	
+end
+
+When(/^user clicks Graph Stock$/) do
+	click_button('graph_stock');
+end
+
 Then(/^graph should be loaded on the dashboard$/) do
 	page.has_content?("Stock Graph");
 end
@@ -37,4 +49,14 @@ end
 
 Then(/^graph should zoom$/) do
 	page.has_content?("graph_here");
+end
+
+Then(/^detailed information widget should populate$/) do
+
+end
+
+Then(/^graph should add stock$/) do
+	text = page.driver.browser.switch_to.alert.text # Should be Successful log in! popup
+	expect(text).to eq 'Added FB to graph.' # RSpec to check string
+	page.driver.browser.switch_to.alert.accept
 end
