@@ -1,6 +1,6 @@
 		$.ajax({
 				method : "GET",
-				url: "../BackEnd.php",
+				url: "BackEnd.php",
 				success: function(data) {
 				}
 			});
@@ -39,8 +39,6 @@
 			// ask the server for the rows in the form of the historical data
 			$.getJSON("checkRows.php",
 					function(data) {
-						console.log(data.length);
-						console.log(data);
 						for(var i = 0; i < data.length; ++i)
 						{
 							var row = new Array();
@@ -86,7 +84,9 @@
 					title: 'Stock Graph',
 					legend: { position : 'right' },
 					explorer: {},
-					trendlines: null
+					trendlines: null,
+					width: 675,
+					height: 275
 				};
 	
 				// the chart object itself
@@ -110,8 +110,7 @@
 			}
 
 		// function to add a stock to the graph
-		function addStock() {
-			var tickerText = document.getElementById('ticker_text').value;
+		function addStock(tickerText) {
 			$.ajax({
 				method : "POST",
 				url: "addStock.php",

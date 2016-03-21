@@ -1,6 +1,7 @@
 <?php
 include_once("Stock.class.php");
 include_once("TrackedStock.class.php");
+include_once("OwnedStock.class.php");
 class Graph
 {
 	public $stocksToGraph = array();
@@ -9,10 +10,11 @@ class Graph
 	{
 		// the end date will be today
 		$endDate = date_create();
+		$startDate = date_create($stock->getInitialDate());
 		$baseURL = "http://query.yahooapis.com/v1/public/yql";
 		// format the query with the ticker, start date, and end date
 		$query = "select * from yahoo.finance.historicaldata where symbol = '" . urlencode($stock->getTicker())
-		. "' and startDate = '" . urlencode(date_format($stock->getInitialDate(), 'Y-m-d'))
+		. "' and startDate = '" . urlencode(date_format($startDate, 'Y-m-d'))
 		. "' and endDate = '" .urlencode(date_format($endDate, 'Y-m-d')) . "'";
 		
 		$queryURL = $baseURL . "?q=" . urlencode($query);

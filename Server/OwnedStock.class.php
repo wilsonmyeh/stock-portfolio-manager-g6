@@ -1,5 +1,4 @@
-<body>	
-	<?php
+<?php
 		class OwnedStock extends Stock{
 			private $initialPurchasePrice;
 			private $numberOwned;
@@ -20,5 +19,4 @@
 				$this->numberOwned = $numberOwned;
 			}
 		}
-	?>
-</body>
+?>
