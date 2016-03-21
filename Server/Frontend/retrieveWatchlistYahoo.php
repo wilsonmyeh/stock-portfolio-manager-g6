@@ -46,7 +46,7 @@
 				<b>Price:</b> <span class="money"><?php echo'$ '.$stock[2]; ?></span> <br />
 				<b>Dollar Change:</b>  <span class="money"><?php echo '$ '. $stock[4]; ?></span> <br />
 				<b>Percent Change:</b> <span class="money"><?php echo $stock[5]; ?></span> <br />
-				<input type="checkbox" onchange="addStock(<?php echo '\''.$stock[0].'\''; ?>);">Graph
+				<input type="checkbox" id="<?php echo $stock[0].'checkbox'; ?>" onchange="addStock(<?php echo '\''.$stock[0].'\''; ?>);">Graph
 				
 				<form action="http://localhost/Frontend/removeWatchedStock.php" method="POST" enctype="multipart/form-data" style="display: inline;">
 					<input hidden type="text" name="ticker"  value = <?php echo $stock[0]; ?>>
