@@ -35,6 +35,14 @@ When(/^user clicks Graph Stock$/) do
 	click_button('graph_stock');
 end
 
+When(/^user clicks Graph Checkbox in Watchlist$/) do
+	check('FBcheckbox');
+end
+
+When(/^user clicks Graph Checkbox in Portfolio$/) do
+	check('FBcheckboxPortfolio');
+end
+
 Then(/^graph should be loaded on the dashboard$/) do
 	page.has_content?("Stock Graph");
 end

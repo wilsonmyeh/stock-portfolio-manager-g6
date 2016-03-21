@@ -63,3 +63,30 @@ Scenario: Add Stock To Graph Using Text Field And Button
 		And fills Add Stock Ticker as "FB"
 		When user clicks Graph Stock
 		Then graph should add stock
+
+Scenario: Clicked On Graph Checkbox in Watchlist
+		Given user navigates to http://localhost/Frontend/login.html
+		And fills Username as "halfond@usc.edu"
+		And fills Password as "HelloWorld1!"
+		And logs in
+		And waits for 15 seconds
+		When user clicks Graph Checkbox in Watchlist
+		Then graph should add stock
+
+Scenario: Clicked On Graph Checkbox in Portfolio
+		Given user navigates to http://localhost/Frontend/login.html
+		And fills Username as "halfond@usc.edu"
+		And fills Password as "HelloWorld1!"
+		And logs in
+		And waits for 15 seconds
+		When user clicks Graph Checkbox in Portfolio
+		Then graph should add stock
+
+Scenario: Remove Stock from Graph
+		Given user navigates to http://localhost/Frontend/login.html
+		And fills Username as "halfond@usc.edu"
+		And fills Password as "HelloWorld1!"
+		And logs in
+		And waits for 15 seconds
+		When user clicks Graph Checkbox in Portfolio
+		Then graph should add stock
