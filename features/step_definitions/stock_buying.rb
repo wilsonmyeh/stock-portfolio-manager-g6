@@ -53,3 +53,7 @@ Given(/^sells stock$/) do
 	expect(text).to eq 'Transaction successful!' # RSpec to check string
 	page.driver.browser.switch_to.alert.accept # Click through the popup
 end
+
+Given(/^check update stock$/) do
+	page.should have_css("#GOOG", :text => "Alphabet")
+end
