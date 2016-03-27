@@ -1,5 +1,7 @@
 # Stock Portfolio Manager
 
+Mock web application for managing your stocks. Team project for CSCI310 (Software Engineering).
+
 ## Features
 - Upload a CSV of your current portfolio.
 - Automatically track changes in stocks you own.
